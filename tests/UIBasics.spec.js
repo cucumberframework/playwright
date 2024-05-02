@@ -9,7 +9,7 @@ test('Browser  playwright test execution', async ({browser})=>
 
     //it is used to open new page 
     const page= await context.newPage();
-    await page.goto("https://www.google.com");
+    await page.goto("https://www.google.com"); 
 });
 
 test('First playwright test execution', async ({page})=>
