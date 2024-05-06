@@ -65,15 +65,18 @@ test('First playwright test execution', async ({page})=>
 
   //click on Adavance search and then select the dropdown 
    await page.mainFrame();
+   await page.waitForLoadState("networkidle");
    await advancedSearch.waitFor();
    await advancedSearch.click();
 
    // navigating freame inside frame
    const frameOne = await page.frameLocator(".embed-responsive-item");
    const frameTwo= await frameOne.frameLocator("#ebRealModalFrame");
-   await frameOne.frameLocator("#ebRealModalFrame").locator("#both_nm").fill("Rahul");
-   console.log(await frameTwo.locator("#both_nm").isVisible());
-   await frameTwo.locator("#ipID_65627").click();
-   const typeDropdown= await frameTwo.locator("#sc65627").waitFor();
+   await frameTwo.locator(".RADIO").first().waitFor();
+   //click on Radio button got Contacts
+   await frameTwo.locator(".RADIO").nth(1).click();
+   await frameOne.frameLocator("#ebRealModalFrame").locator("#nm").fill("bobby");
+   // console.log(await frameTwo.locator("#both_nm").isVisible());
+   console.log(await frameTwo.locator("#ipID_65627").isVisible());
 
 });
