@@ -22,6 +22,7 @@ test.only('First playwright test execution', async ({page})=>
    const officeName=loginPageFrame.locator('#Office'); 
    const userName=loginPageFrame.locator("#User");
    const password=loginPageFrame.locator("#Pwd");
+   const rememberMeCheckBox=loginPageFrame.locator("#remember");
    const submitButton=loginPageFrame.locator("#submit");
    const advancedSearch= page.locator("#searchAdvanced");
    const searchBox=page.locator("#search_value");
@@ -45,6 +46,8 @@ test.only('First playwright test execution', async ({page})=>
    await password.fill("");
    await password.fill('sod3mo');
    console.log('Added correct credentials and clicked ');
+   await rememberMeCheckBox.waitFor()
+   await rememberMeCheckBox.click();
    await submitButton.click();
    await page.mainFrame(); 
    console.log(await advancedSearch.textContent());
