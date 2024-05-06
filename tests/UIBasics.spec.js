@@ -34,10 +34,11 @@ test('First playwright test execution', async ({page})=>
    const errorMesage = await loginPageFrame.locator('form[id="loginForm"] div[style*="margin-bottom"] span[reason*="Your sign-in information"]').textContent();
    await expect(await loginPageFrame.locator('form[id="loginForm"] div[style*="margin-bottom"] span[reason*="Your sign-in information"]')).toContainText('Your sign-in information is incorrect. Please try again.');
    console.log(errorMesage);
+
    // if i want to perform action on the first element  out of hte list of elements then 
-    console.log(await loginPageFrame.locator('form[id="loginForm"] div[class="input-group addon-left"]').first().textContent()); //this will give the first element 
-    console.log(await loginPageFrame.locator('form[id="loginForm"] div[class="input-group addon-left"]').last().textContent()); //this will give the last element from hte list of element
-    console.log(await loginPageFrame.locator('form[id="loginForm"] div[class="input-group addon-left"]').nth(1).textContent()); //this will give the element of nth index 
+   console.log(await loginPageFrame.locator('form[id="loginForm"] div[class="input-group addon-left"]').first().textContent()); //this will give the first element 
+   console.log(await loginPageFrame.locator('form[id="loginForm"] div[class="input-group addon-left"]').last().textContent()); //this will give the last element from hte list of element
+   console.log(await loginPageFrame.locator('form[id="loginForm"] div[class="input-group addon-left"]').nth(1).textContent()); //this will give the element of nth index 
    await officeName.fill("");
    await officeName.fill('bobbyms')
    console.log('Added correct user name');
@@ -49,6 +50,7 @@ test('First playwright test execution', async ({page})=>
    await rememberMeCheckBox.waitFor()
    await rememberMeCheckBox.click();
    await submitButton.click();
+
    //switch to mainframe
    await page.mainFrame(); 
    console.log(await advancedSearch.textContent());
@@ -61,17 +63,17 @@ test('First playwright test execution', async ({page})=>
    await topHeaderTab.last().waitFor(); // it will wait for the last element to load from the list of element 
    console.log(await topHeaderTab.allTextContents());
 
-  /* //click on Adavance search and then select the dropdown 
+  //click on Adavance search and then select the dropdown 
    await page.mainFrame();
-   
+   await advancedSearch.waitFor();
    await advancedSearch.click();
-   const frameOne = await page.frameLocator("#iHFl9");
-   await frameOne.frameLocator("#ebRealModalFrame").locator("#both_nm").fill("Rahul");
-   
-   console.log(await page.locator("#both_nm").isVisible());
-   const typeDropdown= await page.locator("#sc65627").waitFor();
-   await typeDropdown.selectOption('106');
-   */
 
+   // navigating freame inside frame
+   const frameOne = await page.frameLocator(".embed-responsive-item");
+   const frameTwo= await frameOne.frameLocator("#ebRealModalFrame");
+   await frameOne.frameLocator("#ebRealModalFrame").locator("#both_nm").fill("Rahul");
+   console.log(await frameTwo.locator("#both_nm").isVisible());
+   await frameTwo.locator("#ipID_65627").click();
+   const typeDropdown= await frameTwo.locator("#sc65627").waitFor();
 
 });
