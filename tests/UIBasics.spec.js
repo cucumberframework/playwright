@@ -49,15 +49,29 @@ test.only('First playwright test execution', async ({page})=>
    await rememberMeCheckBox.waitFor()
    await rememberMeCheckBox.click();
    await submitButton.click();
+   //switch to mainframe
    await page.mainFrame(); 
    console.log(await advancedSearch.textContent());
    await expect(advancedSearch).toContainText('Advanced Search');  //this will conpare the actual and expected text
    await searchBox.fill("Test1");
    await searchIcon.click();
-   const pageFrame= page.frameLocator('#frame_cache_0');
-   const topHeaderTab= pageFrame.locator('td[reflinkbarid="_window_id1-linkbar"]');
+   const pageFrame= await page.frameLocator('#frame_cache_0');
+   const topHeaderTab= await pageFrame.locator('td[reflinkbarid="_window_id1-linkbar"]');
   //  await page.waitForLoadState('networkidle'); // it will wait for all network call to get complete 
    await topHeaderTab.last().waitFor(); // it will wait for the last element to load from the list of element 
    console.log(await topHeaderTab.allTextContents());
+
+  /* //click on Adavance search and then select the dropdown 
+   await page.mainFrame();
+   
+   await advancedSearch.click();
+   const frameOne = await page.frameLocator("#iHFl9");
+   await frameOne.frameLocator("#ebRealModalFrame").locator("#both_nm").fill("Rahul");
+   
+   console.log(await page.locator("#both_nm").isVisible());
+   const typeDropdown= await page.locator("#sc65627").waitFor();
+   await typeDropdown.selectOption('106');
+   */
+
 
 });
