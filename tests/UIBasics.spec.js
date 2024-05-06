@@ -12,7 +12,7 @@ test('Browser  playwright test execution', async ({browser})=>
     await page.goto("https://www.google.com"); 
 })
 
-test.only('First playwright test execution', async ({page})=>
+test('First playwright test execution', async ({page})=>
 {
    await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
    console.log(await page.title());
