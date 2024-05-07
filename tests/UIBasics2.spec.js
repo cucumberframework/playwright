@@ -18,14 +18,13 @@ test('First playwright test execution', async ({browser})=>
    const searchBox=page.locator("#search_value");
    const searchIcon=page.locator(".icon-search");
    const userDropDown= page.locator("#toplinkUserName");
-   const trainingCentre= page.locator("a[href*='training_centre']");
+   const trainingCentre= page.locator("a[href*='training_center']");
 
 
    // Enter In correct office name , user name and password and then click on Submit
    await officeName.fill('bobbyms')
    await userName.fill('Bobby');
    await password.fill('sod3mo');
-   await submitButton.click();
    await rememberMeCheckBox.waitFor()
    await rememberMeCheckBox.click();
    await submitButton.click();
@@ -35,11 +34,16 @@ test('First playwright test execution', async ({browser})=>
    await userDropDown.waitFor();
    await userDropDown.click(); 
 
-  /* 
+  
   //user cliks on training centre 
-   const [newpage]= Promise.all(
+   const [newpage]= await Promise.all(
     [context.waitForEvent('page'),
-    await trainingCentre.click(),]
+    trainingCentre.click()]
    );
-*/
+   // clicking element from newly opened tab 
+   const gettingStarted= newpage.locator("a[title='Getting Started with SmartOffice']")
+   await gettingStarted.click();
+   
+   // switching back to main page and then performing action on the same
+   await userDropDown.click();
 });
