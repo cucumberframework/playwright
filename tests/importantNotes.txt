@@ -5,7 +5,8 @@ trace: 'retain-on-failure' this will generate traces only for failed test script
 
 //special locators in playwright
 //bacically used on checkbox or radio button page.
-page.getByLabel('we need to pass the label text to identify the object'); 
+page.getByLabel('we need to pass the label text to identify the object');
+page.getByPlaceHolder("password")
 
 
 

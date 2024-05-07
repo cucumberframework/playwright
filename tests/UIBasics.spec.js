@@ -12,18 +12,23 @@ test('Browser  playwright test execution', async ({browser})=>
     await page.goto("https://www.google.com"); 
 })
 
-test('Test1 from UI basics file', async ({page})=>
+test.only('Test1 from UI basics file', async ({page})=>
 {
    await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
    console.log(await page.title());
    await expect(page).toHaveTitle('SmartOffice');
    //Switch to frame of the creadentials 
    const loginPageFrame = await page.frameLocator('#frame_cache_0');
-   const officeName=loginPageFrame.locator('#Office'); 
+   // const officeName=loginPageFrame.locator('#Office'); 
+
+   // we can get the element with the hellp of placeholder also 
+   const officeName=loginPageFrame.getByPlaceholder("Office Name");
    const userName=loginPageFrame.locator("#User");
    const password=loginPageFrame.locator("#Pwd");
    const rememberMeCheckBox=loginPageFrame.locator("#remember");
-   const submitButton=loginPageFrame.locator("#submit");
+
+   //Locating element with getByRole, which accepts two arguments , 1st is type of element and other is name of the actial element which is displayed in the screen
+   const submitButton=loginPageFrame.getByRole('button',{name: 'Sign in'});
    const advancedSearch= page.locator("#searchAdvanced");
    const searchBox=page.locator("#search_value");
    const searchIcon=page.locator(".icon-search");
@@ -92,5 +97,20 @@ test('Test1 from UI basics file', async ({page})=>
 
    // console.log(await frameTwo.locator("#both_nm").isVisible());
    console.log(await frameTwo.locator("#ipID_65627").isVisible());
+
+   // finding the element with the Role and other parameters 
+   await frameTwo.getByRole("button",{name: 'Search'}).click();
+   frameTwo.wa
+   /*if(await frameTwo.getByLabel('Household Name').isVisible()){ 
+    await expect (frameTwo.getByLabel('Household Name')).toHaveText('Household Name');
+   }
+  const houseHoldnameField=await frameTwo.locator("div[class='FIELDS'] input[uniqueeventid*='SimpleForm']");
+  await houseHoldnameField.click();
+  */
+
+  await page.waitForLoadState("networkidle");
+  const lastName= await pageFrame.locator('#lastname').getAttribute('value');
+  console.log(lastName);
+  await expect(lastName).toBe('Bobby');
 
 });
