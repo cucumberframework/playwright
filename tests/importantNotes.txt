@@ -1,2 +1,4 @@
 
 1. For traces we have to navigate to https://traces.playwright.dev then we need to paste the trace.zip folder to view the traces 
+
+trace: 'retain-on-failure' this will generate traces only for failed test scripts

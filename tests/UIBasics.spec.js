@@ -12,7 +12,7 @@ test('Browser  playwright test execution', async ({browser})=>
     await page.goto("https://www.google.com"); 
 })
 
-test('First playwright test execution', async ({page})=>
+test('Test1 from UI basics file', async ({page})=>
 {
    await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
    console.log(await page.title());
@@ -53,12 +53,14 @@ test('First playwright test execution', async ({page})=>
    await password.fill("");
    await password.fill('sod3mo');
    console.log('Added correct credentials and clicked ');
-   await rememberMeCheckBox.waitFor()
-   await rememberMeCheckBox.click();
+   //await rememberMeCheckBox.waitFor()
+   //await rememberMeCheckBox.click();
    await submitButton.click();
 
    //switch to mainframe
    await page.mainFrame(); 
+   await page.reload();
+   await advancedSearch.waitFor();
    console.log(await advancedSearch.textContent());
    await expect(advancedSearch).toContainText('Advanced Search');  //this will conpare the actual and expected text
    await searchBox.fill("Test1");
@@ -67,7 +69,7 @@ test('First playwright test execution', async ({page})=>
    const topHeaderTab= await pageFrame.locator('td[reflinkbarid="_window_id1-linkbar"]');
 
   //await page.waitForLoadState('networkidle'); // it will wait for all network call to get complete 
-   await topHeaderTab.last().waitFor(); // it will wait for the last element to load from the list of element 
+   await topHeaderTab.first().waitFor(); // it will wait for the last element to load from the list of element 
    console.log(await topHeaderTab.allTextContents());
 
   //click on Adavance search and then select the dropdown 
