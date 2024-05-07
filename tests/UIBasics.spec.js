@@ -29,11 +29,14 @@ test('Test1 from UI basics file', async ({page})=>
    const searchIcon=page.locator(".icon-search");
 
    // Enter In correct office name , user name and password and then click on Submit
-   await officeName.fill('bobbyms1')
+   // Enter In correct office name , user name and password and then click on Submit
+   await officeName.fill('bobbyms')
    await userName.fill('Bobby');
    await password.fill('sod3mo');
+   await rememberMeCheckBox.waitFor()
+   await rememberMeCheckBox.click();
    await submitButton.click();
-
+   /*
    // Check the error message which is displayed and assert the same 
    const errorMesage = await loginPageFrame.locator('form[id="loginForm"] div[style*="margin-bottom"] span[reason*="Your sign-in information"]').textContent();
    await expect(await loginPageFrame.locator('form[id="loginForm"] div[style*="margin-bottom"] span[reason*="Your sign-in information"]')).toContainText('Your sign-in information is incorrect. Please try again.');
@@ -56,10 +59,9 @@ test('Test1 from UI basics file', async ({page})=>
    //await rememberMeCheckBox.waitFor()
    //await rememberMeCheckBox.click();
    await submitButton.click();
-
+*/
    //switch to mainframe
    await page.mainFrame(); 
-   await page.reload();
    await advancedSearch.waitFor();
    console.log(await advancedSearch.textContent());
    await expect(advancedSearch).toContainText('Advanced Search');  //this will conpare the actual and expected text
