@@ -24,11 +24,10 @@ module.exports = defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     // for safari browser user webkit , for firefox user firefox 
-    browserName: 'chromium',
-    trace: 'on-first-retry',
+    browserName: 'webkit',
+    trace: 'on',
     headless: false,
     screenshot: 'on',
-    traces: 'on',
   },
 
 });
