@@ -1,6 +1,6 @@
 const { expect,test } = require("@playwright/test");
 
-test.only('More validations for elements, popups',async({page})=>
+test('More validations for elements, popups',async({page})=>
 {
 await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
 //await page.goto("https://golfoy.com/golf-accessories.html");
