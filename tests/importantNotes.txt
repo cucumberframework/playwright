@@ -1,0 +1,30 @@
+
+1. For traces we have to navigate to https://traces.playwright.dev then we need to paste the trace.zip folder to view the traces 
+
+trace: 'retain-on-failure' this will generate traces only for failed test scripts
+
+//special locators in playwright
+//bacically used on checkbox or radio button page.
+page.getByLabel('we need to pass the label text to identify the object');
+page.getByPlaceHolder("password")
+
+
+
+// to see and run tests from UI test runner 
+npx playwright test --ui 
+---------------------------------------------------------------------------------------------------
+//selecting elements from fropdown
+await page.locators("#country").selectOption({label: 'India'})  //select element with visible text 
+await page.locators("#country").selectOption("India");   //same as above i.e selecting element with visible text
+await page.locator("#country").selectOption({value: 'value present in value tag' }) // selecting element from value tag
+await page.locator("#country").selectOption({index: 1});
+
+await pageFrame.locator("select[inputid='title'] option").nth(1).click(); // this statergy we used with smartoffice application as other starergies were NOT working 
+
+---------------------------------------------------------------------------------------------------
+//check if element is visible or not 
+
+---------------------------------------------------------------------------------------------------
+npx playwright test tests/moreValidations.spec.js --headed --debug  // This will execute test in headed and in debug mode 
+npx playwright test tests/moreValidations.spec.js --ui  //this will run tests in playwright debug cansole
+---------------------------------------------------------------------------------------------------
