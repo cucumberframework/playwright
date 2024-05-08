@@ -12,7 +12,7 @@ module.exports = defineConfig({
     timeout: 10000,
   },
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -25,8 +25,11 @@ module.exports = defineConfig({
   use: {
     // for safari browser user webkit , for firefox user firefox 
     browserName: 'chromium',
-    trace: 'on-first-retry',
-    headless: false
+    // retain on failure wil generate traces only for failed test scripts 
+    
+    trace: 'retain-on-failure',
+    headless: false,
+    screenshot: 'on',
   },
 
 });
