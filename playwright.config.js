@@ -25,6 +25,8 @@ module.exports = defineConfig({
   use: {
     // for safari browser user webkit , for firefox user firefox 
     browserName: 'chromium',
+    // retain on failure wil generate traces only for failed test scripts 
+    
     trace: 'retain-on-failure',
     headless: false,
     screenshot: 'on',

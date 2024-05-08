@@ -100,17 +100,25 @@ test.only('Test1 from UI basics file', async ({page})=>
 
    // finding the element with the Role and other parameters 
    await frameTwo.getByRole("button",{name: 'Search'}).click();
-   frameTwo.wa
+
+   // this is hard wait and will pause the script for 3 seconds 
+   await page.waitForTimeout(3000);
+
    /*if(await frameTwo.getByLabel('Household Name').isVisible()){ 
     await expect (frameTwo.getByLabel('Household Name')).toHaveText('Household Name');
    }
   const houseHoldnameField=await frameTwo.locator("div[class='FIELDS'] input[uniqueeventid*='SimpleForm']");
   await houseHoldnameField.click();
   */
-
-  await page.waitForLoadState("networkidle");
   const lastName= await pageFrame.locator('#lastname').getAttribute('value');
   console.log(lastName);
   await expect(lastName).toBe('Bobby');
 
+  const sourceField=pageFrame.locator("#source");
+  await sourceField.waitFor();
+  await sourceField.fill('SourceField');
+  await page.waitForTimeout(3000);
+
+  await pageFrame.locator("img[ezsubclass='dropdown']").nth(0).click();
+  await pageFrame.locator("#sc65547").selectOption('1');
 });
