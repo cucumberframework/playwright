@@ -21,7 +21,16 @@ await mouseHoverElement.hover();
 
 // handeling iframes with playwright , 
 const pageFrame=await page.frameLocator('#courses-iframe');
+console.log(await pageFrame.locator("a[href='consulting']:visible").textContent());
 await pageFrame.locator("a[href='consulting']:visible").click();
 
+//code to find list of all the courses taken by Rahul shetty 
+const home=pageFrame.locator("a[href='/']").nth(1);
+const homePageContent=pageFrame.locator("div[class='header-text hidden-xs'] h3 span");
+await home.click();
+const homePageTextContent=await homePageContent.textContent()
+const splittedContent=homePageTextContent.split("on");
+const finalContent= await splittedContent[1].split("and");
+console.log(finalContent[0]);
 
 });
