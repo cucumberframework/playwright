@@ -11,8 +11,17 @@ await page.locator("#confirmbtn").click();
 page.on('dialog',dialog=>dialog.accept());
 
 //If we want to click cancel from the dialogue box then
-page.on("dialog",dialog=>dialog.dismiss());
+//page.on("dialog",dialog=>dialog.dismiss());
 
 await page.locator("#confirmbtn").click();
+
+//Mouse hover on element 
+const mouseHoverElement= page.locator("#mousehover");
+await mouseHoverElement.hover();
+
+// handeling iframes with playwright , 
+const pageFrame=await page.frameLocator('#courses-iframe');
+await pageFrame.locator("a[href='consulting']:visible").click();
+
 
 });
