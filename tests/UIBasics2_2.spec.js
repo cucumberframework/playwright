@@ -41,8 +41,12 @@ test('First playwright test execution', async ({browser})=>
     trainingCentre.click()]
    );
    // clicking element from newly opened tab 
-   const gettingStarted= newpage.locator("a[title='Getting Started with SmartOffice']")
+   const gettingStarted= newpage.locator("a[title='Getting Started with SmartOffice']");
+   // take screenshot of hte particular element 
+   await gettingStarted.screenshot({path:'screenshots/CBD.png'});
    await gettingStarted.click();
+
+   
    
    // switching back to main page and then performing action on the same
    await userDropDown.click();
