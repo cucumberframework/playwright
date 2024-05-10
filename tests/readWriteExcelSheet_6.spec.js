@@ -23,5 +23,4 @@ async function writeSheet(filePath,workbook,workSheet,textToReplace,newTextToadd
     cell.value=newTextToadd;
     await workbook.xlsx.writeFile(filePath);
 }
-excelTest('/Users/rahulbarapatre/Desktop/PlayWrightAutomation/externalFiles/playwright.xlsx',"Sheet1","NoWow","NoWow100");
-
+excelTest('/Users/rahulbarapatre/Desktop/PlayWrightAutomation/externalFiles/playwright.xlsx',"Sheet1","NoWow500","NoWow100");
