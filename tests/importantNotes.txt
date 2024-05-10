@@ -29,4 +29,9 @@ await pageFrame.locator("select[inputid='title'] option").nth(1).click(); // thi
 npx playwright test tests/moreValidations.spec.js --headed --debug  // This will execute test in headed and in debug mode 
 npx playwright test tests/moreValidations.spec.js --ui  //this will run tests in playwright debug cansole
 ---------------------------------------------------------------------------------------------------
+//If there are multiple element with same locator out of which few are hidden and few are visible 
+and we want to locate only the elements which are in visable then we have to use ":visible" 
+tag along with the locator as below 
+
+await pageFrame.locator("a[href='consulting']:visible").click();
 
