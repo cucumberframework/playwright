@@ -6,6 +6,8 @@ class CreateStep2{
       this.pwd=this.loginPageFrame.locator("#Pwd");
       this.rememberme=this.loginPageFrame.locator("#remember");
       this.submitButton=this.loginPageFrame.locator("#submit");
+
+   
     }
   async login(officename,username,pwd)
     {
