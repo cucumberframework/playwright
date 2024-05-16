@@ -1,24 +1,14 @@
 
 const {test,expect} =require('@playwright/test')
-<<<<<<< Updated upstream
-const { CreateStep2 } = require('./pageObjects/CreateStep2');
-test('First playwright test execution', async ({page})=>
-=======
 const {POManager}=require('../pageObjects/POManager')
 //json-->String-->JavaScriptObject
 const dataSet=JSON.parse(JSON.stringify(require('../utils/smartOfficeTestData.json')));
-test(`First playwright test execution for ${dataSet.officename}`, async ({page})=>
->>>>>>> Stashed changes
+for(const data of dataSet){
+test(`First playwright test execution for ${data.officename}`, async ({page})=>
 {
-const step2= new CreateStep2(page);
-   
+   const poManager= new POManager(page);
    await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
-<<<<<<< Updated upstream
-   await step2.login('bobbyms', 'Bobby', 'sod3mo')
-   
-   
-=======
-   await poManager.loginPage.login(dataSet[0].officename, dataSet[0].username, dataSet[0].password);
+   await poManager.loginPage.login(data.officename, data.username, data.password);
    await poManager.dashboardHeaderPage.searchContactBusiness("Test1");
    expect(await poManager.dashboardHeaderPage.advanceSearch).toContainText('Advanced Search'); 
    /*
@@ -66,5 +56,5 @@ const step2= new CreateStep2(page);
   await pageFrame.locator("#sc65547").selectOption('1');
 
   */
->>>>>>> Stashed changes
 });
+}
