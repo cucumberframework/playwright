@@ -36,15 +36,15 @@ test('First playwright test execution', async ({browser})=>
 
   
   //user cliks on training centre 
-   const [newpage]= await Promise.all(
+  const [newpage]= await Promise.all(
     [context.waitForEvent('page'),
     trainingCentre.click()]
    );
    // clicking element from newly opened tab 
-   const gettingStarted= newpage.locator("a[title='Getting Started with SmartOffice']");
-   // take screenshot of hte particular element 
-   await gettingStarted.screenshot({path:'screenshots/CBD.png'});
-   await gettingStarted.click();
+   const profileMenu= newpage.locator("a[href*='profile_menu']")
+   // take screenshot of the particular element 
+   await profileMenu.screenshot({path:'screenshots/CBD.png'});
+   await profileMenu.click();
 
    
    

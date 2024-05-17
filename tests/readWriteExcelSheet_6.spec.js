@@ -41,9 +41,9 @@ async function writeIntoSheet(row,col,filePath,newPrice){
 test('Upload and download from the webPage',async({page})=>{
 
     await page.goto('https://rahulshettyacademy.com/upload-download-test/index.html');
-    const downloaadEvent=await page.waitForEvent('download'); // file may take time to download so we are setting the event so that 
+    const downloaadEvent=await page.waitForEvent({event:'download'}); // file may take time to download so we are setting the event so that 
     await page.locator('#downloadButton').click();
-    await downloaadEvent // it will awit for event to complete and event trigger to complete as mentioned in step 44
+    downloaadEvent // it will awit for event to complete and event trigger to complete as mentioned in step 44
     updatePrice('/Users/rahulbarapatre/Downloads/download.xlsx',"Sheet1","Mango",9999,{rowChange:0,columnChange:2});
     await page.locator('#fileinput').click();
     await page.locator('#fileinput').setInputFiles('/Users/rahulbarapatre/Downloads/download.xlsx');

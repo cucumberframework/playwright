@@ -41,8 +41,8 @@ test('First playwright test execution', async ({browser})=>
     trainingCentre.click()]
    );
    // clicking element from newly opened tab 
-   const gettingStarted= newpage.locator("a[title='Getting Started with SmartOffice']")
-   await gettingStarted.click();
+   const profileMenu= newpage.locator("a[href*='profile_menu']")
+   await profileMenu.click();
    
    // switching back to main page and then performing action on the same
    await userDropDown.click();

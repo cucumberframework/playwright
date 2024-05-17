@@ -3,6 +3,7 @@ const {test,expect} =require('@playwright/test')
 const {POManager}=require('../pageObjects/POManager')
 //json-->String-->JavaScriptObject
 const dataSet=JSON.parse(JSON.stringify(require('../utils/smartOfficeTestData.json')));
+test.describe.configure({mode:'parallel'}) //if we want to run test in parallel of same test script file then we need to set this property 
 test(`First playwright test execution for ${dataSet.officename}`, async ({page})=>
 {
 const step2= new CreateStep2(page);
