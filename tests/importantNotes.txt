@@ -35,3 +35,18 @@ tag along with the locator as below
 
 await pageFrame.locator("a[href='consulting']:visible").click();
 
+---------------------------------------------------------------------------------------------------
+
+// taking data from JSON file into test script 
+//json-->String-->JavaScriptObject
+const dataSet=JSON.parse(JSON.stringify(require('../utils/smartOfficeTestData.json')));
+---------------------------------------------------------------------------------------------------
+//paramererizing test data for multiple set of data 
+for(const data of dataSet){
+    test{
+    }
+}
+---------------------------------------------------------------------------------------------------
+//Opening browser and maximize the window size, add below in configuration file 
+ viewport:{width:720,height:720},
+---------------------------------------------------------------------------------------------------

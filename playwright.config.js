@@ -22,15 +22,28 @@ module.exports = defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    // for safari browser user webkit , for firefox user firefox 
-    browserName: 'chromium',
-    // retain on failure wil generate traces only for failed test scripts 
-    
-    trace: 'retain-on-failure',
-    headless: false,
-    screenshot: 'on',
-  },
-
+  projects:[
+    {
+      name:'chrome',
+        use: {
+      // for safari browser user webkit , for firefox user firefox 
+      browserName: 'chromium',
+      // retain on failure wil generate traces only for failed test scripts 
+      trace: 'retain-on-failure',
+      headless: false,
+      screenshot: 'on',
+      viewport:{width:1920,height:1400},
+      },
+    },
+    {
+      name:'safari',
+        use: {
+      browserName: 'webkit',
+      trace: 'retain-on-failure',
+      headless: true,
+      screenshot:'only-on-failure',
+      },
+    }
+]
 });
 
