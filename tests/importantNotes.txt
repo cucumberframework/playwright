@@ -7,11 +7,12 @@ trace: 'retain-on-failure' this will generate traces only for failed test script
 //bacically used on checkbox or radio button page.
 page.getByLabel('we need to pass the label text to identify the object');
 page.getByPlaceHolder("password")
-
-
-
+---------------------------------------------------------------------------------------------------
 // to see and run tests from UI test runner 
 npx playwright test --ui 
+---------------------------------------------------------------------------------------------------
+// this will rin all test cases which are present under test folder 
+npx playwright test 
 
 ---------------------------------------------------------------------------------------------------
 //selecting elements from fropdown
@@ -32,14 +33,13 @@ npx playwright test tests/moreValidations.spec.js --ui  //this will run tests in
 //If there are multiple element with same locator out of which few are hidden and few are visible 
 and we want to locate only the elements which are in visable then we have to use ":visible" 
 tag along with the locator as below 
-
 await pageFrame.locator("a[href='consulting']:visible").click();
 
 ---------------------------------------------------------------------------------------------------
-
 // taking data from JSON file into test script 
 //json-->String-->JavaScriptObject
 const dataSet=JSON.parse(JSON.stringify(require('../utils/smartOfficeTestData.json')));
+
 ---------------------------------------------------------------------------------------------------
 //paramererizing test data for multiple set of data 
 for(const data of dataSet){
@@ -49,4 +49,14 @@ for(const data of dataSet){
 ---------------------------------------------------------------------------------------------------
 //Opening browser and maximize the window size, add below in configuration file 
  viewport:{width:720,height:720},
+
 ---------------------------------------------------------------------------------------------------
+//this is used to run our tests with specific browser and with particular configuration which is mentioned in palywright.conf.js file 
+npx playwright test tests/UIBasics2_2_PageObject.spec.js --project=safari
+
+---------------------------------------------------------------------------------------------------
+//retry mechanism in playwright
+  retries: process.env.CI ? 2 : 3, //we can set retry mechanism on local and on gitHub actions 
+---------------------------------------------------------------------------------------------------
+
+
