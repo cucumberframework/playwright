@@ -6,10 +6,12 @@ const dataSet=JSON.parse(JSON.stringify(require('../utils/smartOfficeTestData.js
 test.describe.configure({mode:'parallel'}) //if we want to run test in parallel of same test script file then we need to set this property 
 test(`First playwright test execution for ${dataSet.officename}`, async ({page})=>
 {
-const step2= new CreateStep2(page);
-   
+   const poManager= new POManager(page);
    await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
    await poManager.loginPage.login(dataSet[0].officename, dataSet[0].username, dataSet[0].password);
+
+   await poManager.loginPage.login('bobbyms', 'Bobby', 'sod3mo');
+
    await poManager.dashboardHeaderPage.searchContactBusiness("Test1");
    expect(await poManager.dashboardHeaderPage.advanceSearch).toContainText('Advanced Search'); 
    /*
