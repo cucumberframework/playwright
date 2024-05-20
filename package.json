@@ -6,9 +6,12 @@
   "scripts": {
     "alluicases":"npx playwright test --ui",
     "allheadlesscases":"npx playwright test --ui",
-    "allsafariexecution":"npx playwright test --project=safari",
-    "allregression":"npx playwright test --project=chrome --grep @regression",
-    "allsmoke":"npx playwright test --project=chrome --grep @smoke"
+    "allsafariexecution":"npx playwright test --project=safari --reporter=line,allure-playwright ",
+    "allregression":"npx playwright test --project=chrome --grep @regression --reporter=line,allure-playwright ",
+    "allsmoke":"npx playwright test --project=chrome --grep @smoke --reporter=line,allure-playwright ",
+    "dryrun":"npx playwright test --grep @dryrun --project=chrome --reporter=line,allure-playwright",
+    "alluregen":"allure generate ./allure-results --clean",
+    "openallure":"allure open ./allure-report"
     },
   "keywords": [],
   "author": "",

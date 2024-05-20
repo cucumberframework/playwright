@@ -1,26 +1,15 @@
 
 const {test,expect} =require('@playwright/test')
-const { CreateStep2 } = require('./pageObjects/CreateStep2');
-const {POManager}=require('./pageObjects/POManager')
-test('First playwright test execution', async ({page})=>
-const {POManager}=require('../pageObjects/POManager')
+const {POManager}=require('./pageObjects/POManager');
 //json-->String-->JavaScriptObject
-const dataSet=JSON.parse(JSON.stringify(require('../utils/smartOfficeTestData.json')));
-test(`First playwright test execution for ${dataSet.officename}`, async ({page})=>
-
+const dataSet=JSON.parse(JSON.stringify(require('../utils/singleLoginMS.json')));
+test(`@dryrun First playwright test execution for ${dataSet.officename}`, async ({page})=>
 {
    const poManager= new POManager(page);
    await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
-
-   await step2.login('bobbyms', 'Bobby', 'sod3mo')
-   
-
-   await poManager.loginPage.login(dataSet[0].officename, dataSet[0].username, dataSet[0].password);
-
-   await poManager.loginPage.login('bobbyms', 'Bobby', 'sod3mo');
-
+   await poManager.loginPage.login(dataSet.officename, dataSet.username, dataSet.password);
    await poManager.dashboardHeaderPage.searchContactBusiness("Test1");
-   expect(await poManager.dashboardHeaderPage.advanceSearch).toContainText('Advanced Search'); 
+   expect(await poManager.dashboardHeaderPage.advanceSearch).toContainText('strAdvancedSearch'); 
    /*
   //click on Adavance search and then select the dropdown 
    await page.mainFrame();
