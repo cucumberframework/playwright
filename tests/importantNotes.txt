@@ -49,4 +49,40 @@ for(const data of dataSet){
 ---------------------------------------------------------------------------------------------------
 //Opening browser and maximize the window size, add below in configuration file 
  viewport:{width:720,height:720},
+
 ---------------------------------------------------------------------------------------------------
+//this is used to run our tests with specific browser and with particular configuration which is mentioned in palywright.conf.js file 
+npx playwright test tests/UIBasics2_2_PageObject.spec.js --project=safari
+
+---------------------------------------------------------------------------------------------------
+//retry mechanism in playwright
+  retries: process.env.CI ? 2 : 3, //we can set retry mechanism on local and on gitHub actions 
+---------------------------------------------------------------------------------------------------
+//Run test scripts based on the tags 
+test(`@regression First playwright test execution for ${data.officename}`, async ({page})=>
+
+npx playwright test --grep @regression --project=chrome
+//--grep @regression(Tag name) will be executed 
+---------------------------------------------------------------------------------------------------
+//Generating Allure reports 
+npm i -D @playwright/test allure-playwright //installing allure in system 
+
+npx playwright test --grep @regresion --project=chrome --reporter=line,allure-playwright   //this will run the suite wuth the tags and hte generate allure-results filder which will be used later
+
+allure generate ./allure-results --clean  //this will generate teh allure report after execution of hte suite 
+
+allure open ./allure-report  //this will be used to open the report 
+
+---------------------------------------------------------------------------------------------------
+//Im  package.json file we need to add the scripts which we need to run like suites we can create 
+//to execute this "npm run alluicases"
+"scripts": {
+    "alluicases":"npx playwright test --ui",
+    "allheadlesscases":"npx playwright test --ui",
+    "allsafariexecution":"npx playwright test --project=safari",
+    "allregression":"npx playwright test --project=chrome --grep @regression",
+    "allsmoke":"npx playwright test --project=chrome --grep @smoke"
+    },
+    ---------------------------------------------------------------------------------------------------
+
+

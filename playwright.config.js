@@ -25,13 +25,11 @@ module.exports = defineConfig({
   projects:[
     {
       name:'chrome',
-        use: {
-      // for safari browser user webkit , for firefox user firefox 
-      browserName: 'chromium',
-      // retain on failure wil generate traces only for failed test scripts 
-      trace: 'retain-on-failure',
-      headless: false,
-      screenshot: 'on',
+      use: {
+      browserName: 'chromium',  // for safari browser user webkit , for firefox user firefox 
+      trace: 'retain-on-failure', // retain on failure wil generate traces only for failed test scripts 
+      headless: true,
+      screenshot:'only-on-failure',
       viewport:{width:1920,height:1400},
       },
     },
@@ -40,8 +38,11 @@ module.exports = defineConfig({
         use: {
       browserName: 'webkit',
       trace: 'retain-on-failure',
-      headless: true,
-      screenshot:'only-on-failure',
+      headless: false,
+      screenshot:'only-on-failure', //this will capture screenshot only when test fails 
+      ignoreHTTPSErrors:true, //this will ignore the SSL certification error and proceed
+      permissions:['geolocation'], // this will allow location popup which comes sometime to know the location
+
       },
     }
 ]

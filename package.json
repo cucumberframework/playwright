@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "alluicases":"npx playwright test --ui",
+    "allheadlesscases":"npx playwright test --ui",
+    "allsafariexecution":"npx playwright test --project=safari",
+    "allregression":"npx playwright test --project=chrome --grep @regression",
+    "allsmoke":"npx playwright test --project=chrome --grep @smoke"
+    },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.43.1",
-    "@types/node": "^20.12.8"
+    "@playwright/test": "^1.44.0",
+    "@types/node": "^20.12.8",
+    "allure-playwright": "^2.15.1"
   },
   "dependencies": {
     "exceljs": "^4.4.0"
