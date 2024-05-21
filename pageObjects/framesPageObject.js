@@ -4,4 +4,4 @@ class framesPageObject{
         this.pageFrame= page.frameLocator('#frame_cache_0');
     }
 }
-module.export={framesPageObject};
+module.exports={framesPageObject};

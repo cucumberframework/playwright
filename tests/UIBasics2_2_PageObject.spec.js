@@ -1,32 +1,38 @@
 
 const {test,expect} =require('@playwright/test')
 const {POManager}=require('../pageObjects/POManager');
+const { allure } = require('allure-playwright');
 //json-->String-->JavaScriptObject
 const dataSet=JSON.parse(JSON.stringify(require('../utils/singleLoginMS.json')));
 test(`@dryrun First playwright test execution for ${dataSet.officename}`, async ({page})=>
 {
    const poManager= new POManager(page);
-   await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
-   await poManager.loginPage.login(dataSet.officename, dataSet.username, dataSet.password);
-   await poManager.dashboardHeaderPage.searchContactBusiness("Test1");
-   expect(await poManager.dashboardHeaderPage.advanceSearch).toContainText('strAdvancedSearch'); 
+   await allure.step('Navigate to the URL',async()=>{
+      await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
+   });
+   await allure.step("LoginIn into the application",async()=>{
+      await poManager.loginPage.login(dataSet.officename, dataSet.username, dataSet.password);
+   });
+   await allure.step("Search for contact or business with name as Test1",async()=>{
+      await poManager.dashboardHeaderPage.searchContactBusiness("Test1");
+      expect(await poManager.dashboardHeaderPage.advanceSearch).toContainText('Advanced Search');
+   });
+  await allure.step("click on Adavance search and then select the dropdown",async()=>{
+      await page.waitForLoadState("networkidle");
+      await poManager.dashboardHeaderPage.advanceSearch.waitFor();
+      await poManager.dashboardHeaderPage.advanceSearch.click();
+      await poManager.searchContactBusinessPopup.contactBusinessRadio.first().waitFor();
+  });
+  await allure.step("click on Radio button got Contacts and assert that radio button is checked ",async()=>{
+     await poManager.searchContactBusinessPopup.contactBusinessRadio.nth(1).click();
+     await expect(poManager.searchContactBusinessPopup.contactBusinessRadio.nth(1)).toBeChecked();
+  });
+   //Enter First name and last name
+   await allure.step("Enter First name and last name",async()=>{
+      await poManager.searchContactBusinessPopup.firstLastName.fill("bobby");
+   });
    
-  /*//click on Adavance search and then select the dropdown 
-   await poManager.dashboardHeaderPage.mainFrame();
-   await page.waitForLoadState("networkidle");
-   await advancedSearch.waitFor();
-   await advancedSearch.click();
-   */
-
-   // navigating freame inside frame
-   const frameOne = await page.frameLocator(".embed-responsive-item");
-   const frameTwo= await frameOne.frameLocator("#ebRealModalFrame");
-   await frameTwo.locator(".RADIO").first().waitFor();
-
-   //click on Radio button got Contacts and assert that radio button is checked 
-   await frameTwo.locator(".RADIO").nth(1).click();
-   await expect(await frameTwo.locator(".RADIO").nth(1)).toBeChecked();
-   await frameOne.frameLocator("#ebRealModalFrame").locator("#nm").fill("bobby");
+   /*
 
    // console.log(await frameTwo.locator("#both_nm").isVisible());
    console.log(await frameTwo.locator("#ipID_65627").isVisible());
