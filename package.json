@@ -6,6 +6,7 @@
   "scripts": {
     "alluicases":"npx playwright test --ui",
     "allheadlesscases":"npx playwright test --ui",
+    "allchromeexecutions":"npx playwright test --project=chrome --reporter=line,allure-playwright",
     "allsafariexecution":"npx playwright test --project=safari --reporter=line,allure-playwright ",
     "allregression":"npx playwright test --project=chrome --grep @regression --reporter=line,allure-playwright ",
     "allsmoke":"npx playwright test --project=chrome --grep @smoke --reporter=line,allure-playwright ",

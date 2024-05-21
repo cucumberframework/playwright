@@ -1,6 +1,6 @@
 
 const {test,expect} =require('@playwright/test')
-const {POManager}=require('./pageObjects/POManager');
+const {POManager}=require('../pageObjects/POManager');
 //json-->String-->JavaScriptObject
 const dataSet=JSON.parse(JSON.stringify(require('../utils/singleLoginMS.json')));
 test(`@dryrun First playwright test execution for ${dataSet.officename}`, async ({page})=>
@@ -10,12 +10,13 @@ test(`@dryrun First playwright test execution for ${dataSet.officename}`, async 
    await poManager.loginPage.login(dataSet.officename, dataSet.username, dataSet.password);
    await poManager.dashboardHeaderPage.searchContactBusiness("Test1");
    expect(await poManager.dashboardHeaderPage.advanceSearch).toContainText('strAdvancedSearch'); 
-   /*
-  //click on Adavance search and then select the dropdown 
-   await page.mainFrame();
+   
+  /*//click on Adavance search and then select the dropdown 
+   await poManager.dashboardHeaderPage.mainFrame();
    await page.waitForLoadState("networkidle");
    await advancedSearch.waitFor();
    await advancedSearch.click();
+   */
 
    // navigating freame inside frame
    const frameOne = await page.frameLocator(".embed-responsive-item");
