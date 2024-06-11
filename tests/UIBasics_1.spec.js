@@ -12,7 +12,7 @@ test('Browser  playwright test execution', async ({browser})=>
     await page.goto("https://www.google.com"); 
 })
 
-test('Test1 from UI basics file', async ({page})=>
+test('@smoke Test1 from UI basics file', async ({page})=>
 {
    await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
    console.log(await page.title());

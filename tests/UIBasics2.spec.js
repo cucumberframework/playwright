@@ -1,6 +1,6 @@
 
 const {test,expect} =require('@playwright/test')
-test('First playwright test execution', async ({browser})=>
+test('@regression First playwright test execution', async ({browser})=>
 {
     const context= await browser.newContext();
     const page=await context.newPage();

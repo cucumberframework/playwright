@@ -1,10 +1,11 @@
 
 const {test,expect} =require('@playwright/test')
-const {POManager}=require('../pageObjects/POManager')
+const {POManager}=require('../pageObjects/POManager');
+const { allure } = require('allure-playwright');
 //json-->String-->JavaScriptObject
 const dataSet=JSON.parse(JSON.stringify(require('../utils/smartOfficeTestData.json')));
 for(const data of dataSet){
-test(`First playwright test execution for ${data.officename}`, async ({page})=>
+test(`@regression First playwright test execution for ${data.officename}`, async ({page})=>
 {
    const poManager= new POManager(page);
    await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
