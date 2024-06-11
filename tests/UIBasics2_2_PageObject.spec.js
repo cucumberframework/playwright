@@ -96,7 +96,7 @@ test(`@dryrun First playwright test execution for ${dataSet.officename}`, async 
   */
 });
 
-test('Second test to check martoffice flow',async({page})=>{
+test('Second test to check martoffice flow',async({})=>{
 await page.goto("https://www.golfy.com");
 
 });
