@@ -4,15 +4,27 @@ const {POManager}=require('../pageObjects/POManager');
 const { allure } = require('allure-playwright');
 //json-->String-->JavaScriptObject
 const dataSet=JSON.parse(JSON.stringify(require('../utils/singleLoginMS.json')));
-test(`@dryrun First playwright test execution for ${dataSet.officename}`, async ({page})=>
+
+let context;
+let page;
+
+test.describe(`Smaeroffice contact creation flows`,()=>{
+
+   test.beforeEach('`Login into smartoffice',async({browser})=>{
+      context=await browser.newContext();
+      page=await browser.newPage();
+      var poManager= new POManager(page);
+      await allure.step('Navigate to the URL',async()=>{
+         await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
+      });
+      await allure.step("LoginIn into the application",async()=>{
+         await poManager.loginPage.login(dataSet.officename, dataSet.username, dataSet.password);
+      });
+   });
+
+test(`@dryrun First playwright test execution for ${dataSet.officename}`, async ()=>
 {
-   const poManager= new POManager(page);
-   await allure.step('Navigate to the URL',async()=>{
-      await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
-   });
-   await allure.step("LoginIn into the application",async()=>{
-      await poManager.loginPage.login(dataSet.officename, dataSet.username, dataSet.password);
-   });
+   var poManager= new POManager(page);
    await allure.step("Search for contact or business with name as Test1",async()=>{
       await poManager.dashboardHeaderPage.searchContactBusiness("Test1");
       expect(await poManager.dashboardHeaderPage.advanceSearch).toContainText('Advanced Search');
@@ -27,11 +39,31 @@ test(`@dryrun First playwright test execution for ${dataSet.officename}`, async 
      await poManager.searchContactBusinessPopup.contactBusinessRadio.nth(1).click();
      await expect(poManager.searchContactBusinessPopup.contactBusinessRadio.nth(1)).toBeChecked();
   });
-   //Enter First name and last name
-   await allure.step("Enter First name and last name",async()=>{
-      await poManager.searchContactBusinessPopup.firstLastName.fill("bobby");
+   await allure.step("Enter First name and last name and then click on search",async()=>{
+      await poManager.searchContactBusinessPopup.firstLastName.fill("Automa_akshayTambe");
+      await poManager.searchContactBusinessPopup.primaryAdvisor.fill("test");
+      await expect(poManager.searchContactBusinessPopup.searchButtonFromPopup).toBeVisible();
+      await poManager.searchContactBusinessPopup.searchButtonFromPopup.click();
+      await expect(poManager.searchContactBusinessPopup.contactDoesNotExistText).toContainText('Add this Contact?');
    });
-   
+   await allure.step("Verify that contact does not exist popup comes up with yes and NO button and then user clicks on No button",async()=>{
+      await expect(poManager.searchContactBusinessPopup.contactNotExistYesButton).toBeVisible();
+      await poManager.searchContactBusinessPopup.contactNotExistYesButton.click();
+   });
+   await allure.step("Check if new contact popup is opened up",async()=>{
+      await expect(poManager.newContactPopupWin.lastName).toHaveAttribute("ezcolid","65542");
+   });
+   await allure.step("Enter Last name and firstName and then click on save and close ", async()=>{
+     await poManager.newContactPopupWin.lastName.fill('Automa_Akshaytambe'); 
+      await poManager.newContactPopupWin.saveAndClose.click();
+   });
+   await allure.step("Verify that contact detail page is Opened up",async()=>{
+      await expect(poManager.contactDetailPageEle.lastName).toHaveAttribute("rawvalue","Automa_Akshaytambe");
+   });
+   await allure.step("Delete contact record",async()=>{
+      await poManager.dashBoardSideMenu.deleteRecord();
+      
+   });
    /*
 
    // console.log(await frameTwo.locator("#both_nm").isVisible());
@@ -63,3 +95,10 @@ test(`@dryrun First playwright test execution for ${dataSet.officename}`, async 
 
   */
 });
+
+test('Second test to check martoffice flow',async({page})=>{
+await page.goto("https://www.golfy.com");
+
+});
+
+})
