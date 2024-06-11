@@ -13,6 +13,9 @@ page.getByPlaceHolder("password")
 // to see and run tests from UI test runner 
 npx playwright test --ui 
 
+//run test with another config.js file 
+npx playwright test --config=other.conf.js
+
 ---------------------------------------------------------------------------------------------------
 //selecting elements from fropdown
 await page.locators("#country").selectOption({label: 'India'})  //select element with visible text 
