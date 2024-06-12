@@ -9,7 +9,9 @@ class DashboardSidemenu{
         this.contactDeletionNoButton=page.locator('#button2');
     }
     async deleteRecord(){
+    await this.deleteButton.waitFor();
     await this.deleteButton.click();
+    await this.contactDeletionYesButton.waitFor();
     await this.contactDeletionYesButton.click();
     }
 }

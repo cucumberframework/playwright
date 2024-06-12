@@ -11,7 +11,7 @@ class DashboardHeader  {
         this.mainFrame=page.mainFrame(); 
         this.frameCache0=page.frameLocator('#frame_cache_0');
         this.topHeaderTab=this.frameCache0.locator('td[reflinkbarid="_window_id1-linkbar"]');
-    
+        this.addButtonContact=page.locator('#idSearchPeopleContact span:visible')
     
     }
     async searchContactBusiness(contactBusinessName){
