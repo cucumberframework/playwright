@@ -5,6 +5,8 @@ const{ newContactPopup }=require('../pageObjects/newContactPopup')
 const { contactDetailPage }=require('../pageObjects/contactDetailpage')
 const { DashboardSidemenu }=require('../pageObjects/DashboardSidemenu')
 const { sideMenu }=require('../pageObjects/sideMenu');
+const { searchDynamicReports }=require('../pageObjects/Reports/searchDynamicReport');
+const {filters }=require('../pageObjects/Filters/filters')
 class POManager{
 
     constructor(page){
@@ -16,6 +18,8 @@ class POManager{
       this.contactDetailPageEle=new contactDetailPage(page);
       this.dashBoardSideMenu=new DashboardSidemenu(page);
       this.sideMenuOptions=new sideMenu(page);
+      this.searchDynamicReportsPopup=new searchDynamicReports(page);
+      this.filtersPopup=new filters(page);
     }
     async deleteAllExistingRecords(recordName){
       await this.dashboardHeaderPage.advanceSearch.waitFor()
@@ -33,7 +37,6 @@ class POManager{
     }
   }
   async createNewContactRecord(cotactName){
-    
     await this.dashboardHeaderPage.addButton.waitFor();
     await this.dashboardHeaderPage.addButton.click();
     await this.dashboardHeaderPage.addButtonContact.waitFor();
@@ -42,6 +45,24 @@ class POManager{
     await this.newContactPopupWin.lastName.fill(cotactName+"-"+randomNumber);
     await this.newContactPopupWin.saveAndClose.waitFor();
     await this.newContactPopupWin.saveAndClose.click();
+  }
+
+  async searchDynamicReportByKeyword(keyword){
+  await this.sideMenuOptions.getSideMenuOption("Reporting").click();
+   await this.sideMenuOptions.getSubReport("Dynamic Reports").click();
+   await this.searchDynamicReportsPopup.keyWordDropdown.click();
+   await this.searchDynamicReportsPopup.getKeywordOption(keyword).click();
+   await this.searchDynamicReportsPopup.searchButton.click();
+  }
+
+  async createDynamicReport(){
+
+  }
+  async searchDynamicReportByName(name){
+    await this.sideMenuOptions.getSideMenuOption("Reporting").click();
+   await this.sideMenuOptions.getSubReport("Dynamic Reports").click();
+    await this.searchDynamicReportsPopup.reportName.fill(name);
+    await this.searchDynamicReportsPopup.searchButton.click();
   }
 }
 module.exports={POManager};

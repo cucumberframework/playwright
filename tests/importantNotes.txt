@@ -87,5 +87,45 @@ allure open ./allure-report  //this will be used to open the report
     "allsmoke":"npx playwright test --project=chrome --grep @smoke"
     },
     ---------------------------------------------------------------------------------------------------
+// Assert the checked state
+expect(page.getByLabel('Subscribe to newsletter')).toBeChecked();
+
+//to check the radio buttons 
+await page.locator('XL').check();
+
+//selection option from dropdown 
+
+
+// Right click
+await page.getByText('Item').click({ button: 'right' });
+
+// Shift + click
+await page.getByText('Item').click({ modifiers: ['Shift'] });
+
+// Ctrl + click or Windows and Linux
+// Meta + click on macOS
+await page.getByText('Item').click({ modifiers: ['ControlOrMeta'] });
+
+---------------------------------------------------------------------------------------------------
+//enter text characrter by character 
+await page.locator("#locator").pressSequentially("Rahul");
+---------------------------------------------------------------------------------------------------
+//press enter key
+await page.locator("#locator").press("Enter");
+//scrolling down in page 
+await page.locator("#locator").press("pageDown");
+await page.locator("#locator").press("pageUp");
+---------------------------------------------------------------------------------------------------
+//drag and drop function
+await page.locator('#item-to-be-dragged').dragTo(page.locator('#item-to-drop-at'));
+
+---------------------------------------------------------------------------------------------------
+//finding element with matching text and perform action on it 
+await page.getByText("Access all our Courses").click();
+
+
+
+
+
 
 

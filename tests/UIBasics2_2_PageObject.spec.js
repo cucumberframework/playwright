@@ -101,11 +101,20 @@ test.skip('Creating new contact',async()=>{
    await poManager.createNewContactRecord("Auto");
    //await poManager.deleteAllExistingRecords("Rahul");
 });
-test('Check if Record is present in dynamic report',async()=>{
-   var poManager= new POManager(page);
-   await poManager.sideMenuOptions.reports.waitFor();
-   await poManager.sideMenuOptions.reports.click();
-   await poManager.sideMenuOptions.getSubReport('Dynamic Reports').click();
-})
 
-})
+test('Check filter setup',async()=>{
+   var poManager= new POManager(page);
+   await poManager.sideMenuOptions.getSideMenuOption("Setup");
+   await poManager.sideMenuOptions.getFilterSubMenu("Filters");
+   await poManager.filtersPopup.filterNameTextField.fill("Auto_");
+   await poManager.filtersPopup.searchButton.click();
+
+});
+test('Seach for Dynamic report with filter',async()=>{
+   var poManager= new POManager(page);
+   await poManager.searchDynamicReportByName("Automa_")
+ //await poManager.searchDynamicReportByKeyword("All")
+
+});
+
+});
