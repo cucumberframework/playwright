@@ -87,5 +87,94 @@ allure open ./allure-report  //this will be used to open the report
     "allsmoke":"npx playwright test --project=chrome --grep @smoke"
     },
     ---------------------------------------------------------------------------------------------------
+// Assert the checked state
+expect(page.getByLabel('Subscribe to newsletter')).toBeChecked();
+
+//to check the radio buttons 
+await page.locator('XL').check();
+
+//selection option from dropdown 
+
+
+// Right click
+await page.getByText('Item').click({ button: 'right' });
+
+// Shift + click
+await page.getByText('Item').click({ modifiers: ['Shift'] });
+
+// Ctrl + click or Windows and Linux
+// Meta + click on macOS
+await page.getByText('Item').click({ modifiers: ['ControlOrMeta'] });
+
+---------------------------------------------------------------------------------------------------
+//enter text characrter by character 
+await page.locator("#locator").pressSequentially("Rahul");
+---------------------------------------------------------------------------------------------------
+//press enter key
+await page.locator("#locator").press("Enter");
+//scrolling down in page 
+await page.locator("#locator").press("pageDown");
+await page.locator("#locator").press("pageUp");
+---------------------------------------------------------------------------------------------------
+//drag and drop function
+await page.locator('#item-to-be-dragged').dragTo(page.locator('#item-to-drop-at'));
+
+---------------------------------------------------------------------------------------------------
+//finding element with matching text and perform action on it 
+await page.getByText("Access all our Courses").click();
+
+---------------------------------------------------------------------------------------------------
+//clicking on the element which is overlayed by another element 
+await page.getByRole('button').click({ force: true });
+---------------------------------------------------------------------------------------------------
+//focus on the element 
+await page.getByLabel('Password').focus();
+---------------------------------------------------------------------------------------------------
+//check if the element have the exact maching text 
+await expect(page.getByTestId('status')).toHaveText('Submitted');
+---------------------------------------------------------------------------------------------------
+// You can specify a custom expect message as a second argument to the expect function
+await expect(page.getByText('Name'), 'should be logged in').toBeVisible();
+
+---------------------------------------------------------------------------------------------------
+//check if the text is present 
+expect(await poManager.dashboardHeaderPage.advanceSearch).toContainText('Advanced Search');
+
+//check if element is visible 
+await expect(poManager.searchContactBusinessPopup.searchButtonFromPopup).toBeVisible();
+
+//check of particular element has following attribute alue 
+await expect(poManager.newContactPopupWin.lastName).toHaveAttribute("ezcolid","65542");
+
+---------------------------------------------------------------------------------------------------
+await expect(locator).toBeAttached()	Element is attached
+await expect(locator).toBeChecked()	Checkbox is checked
+await expect(locator).toBeDisabled()	Element is disabled
+await expect(locator).toBeEditable()	Element is editable
+await expect(locator).toBeEmpty()	Container is empty
+await expect(locator).toBeEnabled()	Element is enabled
+await expect(locator).toBeFocused()	Element is focused
+await expect(locator).toBeHidden()	Element is not visible
+await expect(locator).toBeInViewport()	Element intersects viewport
+await expect(locator).toBeVisible()	Element is visible
+await expect(locator).toContainText()	Element contains text
+await expect(locator).toHaveAccessibleDescription()	Element has a matching accessible description
+await expect(locator).toHaveAccessibleName()	Element has a matching accessible name
+await expect(locator).toHaveAttribute()	Element has a DOM attribute
+await expect(locator).toHaveClass()	Element has a class property
+await expect(locator).toHaveCount()	List has exact number of children
+await expect(locator).toHaveCSS()	Element has CSS property
+await expect(locator).toHaveId()	Element has an ID
+await expect(locator).toHaveJSProperty()	Element has a JavaScript property
+await expect(locator).toHaveRole()	Element has a specific ARIA role
+await expect(locator).toHaveScreenshot()	Element has a screenshot
+await expect(locator).toHaveText()	Element matches text
+await expect(locator).toHaveValue()	Input has a value
+await expect(locator).toHaveValues()	Select has options selected
+await expect(page).toHaveScreenshot()	Page has a screenshot
+await expect(page).toHaveTitle()	Page has a title
+await expect(page).toHaveURL()	Page has a URL
+await expect(response).toBeOK()	Response has an OK status
+
 
 
