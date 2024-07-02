@@ -24,7 +24,7 @@ test.describe('this is first describe',()=>{
     test('Checking multiple windows',async()=>{
       await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
       const [newWindow]= await Promise.all([
-        context.waitForEvent("popup"),
+        context.waitForEvent("page"),
         page.locator("#openwindow").click()
       ]);
       await newWindow.waitForLoadState();
