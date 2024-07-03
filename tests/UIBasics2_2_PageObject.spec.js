@@ -10,7 +10,7 @@ let page;
 
 test.describe(`Smaeroffice contact creation flows`,()=>{
 
-   test.beforeEach('`Login into smartoffice',async({browser})=>{
+   test.beforeEach('Login into smartoffice',async({browser})=>{
       context=await browser.newContext();
       page=await browser.newPage();
       var poManager= new POManager(page);
@@ -22,7 +22,7 @@ test.describe(`Smaeroffice contact creation flows`,()=>{
       });
    });
 
-test(`@dryrun First playwright test execution for ${dataSet.officename}`, async ()=>
+test.skip(`@dryrun First playwright test execution for ${dataSet.officename}`, async ()=>
 {
    var poManager= new POManager(page);
    await allure.step("Search for contact or business with name as Test1",async()=>{
@@ -96,9 +96,25 @@ test(`@dryrun First playwright test execution for ${dataSet.officename}`, async 
   */
 });
 
-test('Second test to check martoffice flow',async({})=>{
-await page.goto("https://www.golfy.com");
+test.skip('Creating new contact',async()=>{
+   var poManager= new POManager(page);
+   await poManager.createNewContactRecord("Auto");
+   //await poManager.deleteAllExistingRecords("Rahul");
+});
+
+test('Check filter setup',async()=>{
+   var poManager= new POManager(page);
+   await poManager.sideMenuOptions.getSideMenuOption("Setup");
+   await poManager.sideMenuOptions.getFilterSubMenu("Filters");
+   await poManager.filtersPopup.filterNameTextField.fill("Auto_");
+   await poManager.filtersPopup.searchButton.click();
+
+});
+test('Seach for Dynamic report with filter',async()=>{
+   var poManager= new POManager(page);
+   await poManager.searchDynamicReportByName("Automa_")
+ //await poManager.searchDynamicReportByKeyword("All")
 
 });
 
-})
+});
