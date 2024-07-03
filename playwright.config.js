@@ -10,7 +10,8 @@ module.exports = defineConfig({
   // this will be timeout for the expect ondition
   expect: {
     timeout: 10000,
-    //Main branch commit  
+    //Main branch commit Pushed to main branch 
+      
   },
   /* Run tests in files in parallel */
   fullyParallel: false,
