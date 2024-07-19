@@ -41,7 +41,8 @@ test('@dryrun repracticing', async({page})=>{
         await golfyManager.homepage.searchBar.fill("pro v1 golf ball");
         // await golfyManager.homepage.getRequiredGolfBall.click();
         await golfyManager.homepage.searchBar.press('Enter');
-        await golfyManager.homepage.searchRequiredBall("pro v1 golf ball").click();
+        await page.waitForTimeout(4000);
+        await golfyManager.homepage.searchRequiredBall().click();
     });
 
     await allure.step('Add the balls Quantity to two and check if quantity has increased', async()=>{

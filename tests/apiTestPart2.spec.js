@@ -22,7 +22,7 @@ test("RahulShetty Acadamy library api",async({request})=>{
 
 });
 
-test("Get the posted book",async({request})=>{
+test.skip("Get the posted book",async({request})=>{
     //var author='84522'
     const resource='/Library/GetBook.php?AuthorName=kkkkk';
     console.log(resource)

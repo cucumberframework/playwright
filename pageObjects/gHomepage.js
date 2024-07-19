@@ -9,8 +9,8 @@ class gHomepage{
         
 
     }
-    async searchRequiredBall(ballName){
-        return await this.page.getByText(ballName).nth(1);
+    async searchRequiredBall(){
+        return await this.page.locator("p[class='product-item-brand']").nth(0);
     }
 }
 module.exports={gHomepage};
