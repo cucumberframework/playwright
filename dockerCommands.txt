@@ -1,0 +1,11 @@
+docker build -t playwright-project .
+
+-t playwright-project: This tags your image with the name playwright-project.
+.: This specifies the current directory as the build context.
+
+docker run --rm -it playwright-project
+
+
+--rm: Automatically remove the container when it exits.
+-it: Run the container in interactive mode with a TTY (useful for seeing test output).
+playwright-project: The name of the image you built.

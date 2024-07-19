@@ -11,7 +11,7 @@
     "allregression":"npx playwright test --project=chrome --grep @regression --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
     "allsmoke":"npx playwright test --project=chrome --grep @smoke --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report ",
     "dryrun":"npx playwright test --grep @dryrun --project=chrome --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
-    "build": "next build"
+    "test": "playwright test"
   },
   "keywords": [],
   "author": "",

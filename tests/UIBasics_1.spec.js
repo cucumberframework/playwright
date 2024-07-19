@@ -72,12 +72,14 @@ test('@smoke Test1 from UI basics file', async ({page})=>
    await expect(advancedSearch).toContainText('Advanced Search');  //this will conpare the actual and expected text
    await searchBox.fill("Test1");
    await searchIcon.click();
-   const pageFrame= await page.frameLocator('#frame_cache_0');
-   const topHeaderTab= await pageFrame.locator('td[reflinkbarid="_window_id1-linkbar"]');
 
   //await page.waitForLoadState('networkidle'); // it will wait for all network call to get complete 
-   await topHeaderTab.first().waitFor(); // it will wait for the last element to load from the list of element 
-   console.log(await topHeaderTab.allTextContents());
+  // await topHeaderTab.first().waitFor(); // it will wait for the last element to load from the list of element 
+   //console.log(await topHeaderTab.allTextContents());
+
+   const pageFrame= await page.frameLocator('#frame_cache_0');
+   const topHeaderTab= await pageFrame.locator('.CURRENTTAB');
+   await expect(topHeaderTab).toContainText('Personal'); 
 
   //click on Adavance search and then select the dropdown 
    await page.mainFrame();
@@ -102,7 +104,7 @@ test('@smoke Test1 from UI basics file', async ({page})=>
    await frameTwo.getByRole("button",{name: 'Search'}).click();
 
    // this is hard wait and will pause the script for 3 seconds 
-   await page.waitForTimeout(3000);
+   await page.waitForTimeout(3000); 
 
    /*if(await frameTwo.getByLabel('Household Name').isVisible()){ 
     await expect (frameTwo.getByLabel('Household Name')).toHaveText('Household Name');
@@ -123,5 +125,5 @@ test('@smoke Test1 from UI basics file', async ({page})=>
   await pageFrame.locator("img[ezsubclass='dropdown']").nth(1).click();
   await pageFrame.locator("select[inputid='title'] option").nth(1).click();
 
-  //check if element element is visible or not 
+  //check if element element is visible or not
 });

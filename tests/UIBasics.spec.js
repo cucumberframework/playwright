@@ -73,11 +73,11 @@ test('Test1 from UI basics file', async ({page})=>
    await searchBox.fill("Test1");
    await searchIcon.click();
    const pageFrame= await page.frameLocator('#frame_cache_0');
-   const topHeaderTab= await pageFrame.locator('td[reflinkbarid="_window_id1-linkbar"]');
-
+   const topHeaderTab= await pageFrame.locator('.CURRENTTAB');
+   await expect(topHeaderTab).toContainText('Personal'); 
   //await page.waitForLoadState('networkidle'); // it will wait for all network call to get complete 
-   await topHeaderTab.first().waitFor(); // it will wait for the last element to load from the list of element 
-   console.log(await topHeaderTab.allTextContents());
+   //await topHeaderTab.waitForElementState('visible'); // it will wait for the last element to load from the list of element 
+   //console.log(await topHeaderTab.allTextContents());
 
   //click on Adavance search and then select the dropdown 
    await page.mainFrame();
