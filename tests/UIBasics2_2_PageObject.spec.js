@@ -104,8 +104,8 @@ test.skip('Creating new contact',async()=>{
 
 test('Check filter setup',async()=>{
    var poManager= new POManager(page);
-   await poManager.sideMenuOptions.getSideMenuOption("Setup");
-   await poManager.sideMenuOptions.getFilterSubMenu("Filters");
+   await poManager.sideMenuOptions.getSideMenuOption("Setup").click();
+   await poManager.sideMenuOptions.getFilterSubMenu("Filter").click();
    await poManager.filtersPopup.filterNameTextField.fill("Auto_");
    await poManager.filtersPopup.searchButton.click();
 
