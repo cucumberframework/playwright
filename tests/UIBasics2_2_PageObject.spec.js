@@ -22,7 +22,7 @@ test.describe(`Smaeroffice contact creation flows`,()=>{
       });
    });
 
-test.skip(`@dryrun First playwright test execution for ${dataSet.officename}`, async ()=>
+test(`@dryrun First playwright test execution for ${dataSet.officename}`, async ()=>
 {
    var poManager= new POManager(page);
    await allure.step("Search for contact or business with name as Test1",async()=>{
