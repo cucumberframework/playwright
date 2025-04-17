@@ -19,6 +19,7 @@ test.describe(`Smaeroffice contact creation flows`,()=>{
       });
       await allure.step("LoginIn into the application",async()=>{
          await poManager.loginPage.login(dataSet.officename, dataSet.username, dataSet.password);
+
       });
    });
 
