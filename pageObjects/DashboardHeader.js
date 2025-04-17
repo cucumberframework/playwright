@@ -20,7 +20,7 @@ class DashboardHeader  {
         await this.advanceSearch.waitFor();
         await this.searchBox.fill("Test1");
         await this.searchIcon.click();
-        await this.topHeaderTab.first().waitFor();   
+       // await this.topHeaderTab.first().waitFor();   
     }
 }
 module.exports={DashboardHeader};

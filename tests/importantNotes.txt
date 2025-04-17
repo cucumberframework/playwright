@@ -72,6 +72,7 @@ npm i -D @playwright/test allure-playwright //installing allure in system
 
 npx playwright test --grep @regresion --project=chrome --reporter=line,allure-playwright   //this will run the suite wuth the tags and hte generate allure-results filder which will be used later
 
+rm -rf ./allure-results/*   ///removesresult from previous executions
 allure generate ./allure-results --clean  //this will generate teh allure report after execution of hte suite 
 
 allure open ./allure-report  //this will be used to open the report 
