@@ -1,122 +1,102 @@
-const { test, expect } = require('@playwright/test');
-const { POManager } = require('../pageObjects/POManager');
-const { allure } = require('allure-playwright');
+/**
+ * Test suite for contact management
+ */
+test('Test suite for contact management', async () => {
+  // Create a new instance of the POManager class, passing in the page object
+  const poManager = new POManager(page);
 
-// json --> String --> JavaScript Object
-const dataSet = JSON.parse(JSON.stringify(require('../utils/singleLoginMS.json')));
-
-let context;
-let page;
-
-test.describe(`SmartOffice contact creation flows`, () => {
-  test.beforeEach('Login into SmartOffice', async ({ browser }) => {
-    context = await browser.newContext();
-    page = await browser.newPage();
-    const poManager = new POManager(page);
-
-    await allure.step('Navigate to the URL', async () => {
-      await page.goto("https://sodev.ebixcrm.com/ms/index.htm");
-    });
-
-    await allure.step("Login into the application", async () => {
-      await poManager.loginPage.login(dataSet.officename, dataSet.username, dataSet.password);
-    });
+  /**
+   * Step 1: Enter First name and Last name and then click on search
+   */
+  await allure.step("Enter First name and Last name and then click on search", async () => {
+    // Fill in the first and last name fields with the value "Automa_akshayTambe"
+    await poManager.searchContactBusinessPopup.firstLastName.fill("Automa_akshayTambe");
+    // Fill in the primary advisor field with the value "test"
+    await poManager.searchContactBusinessPopup.primaryAdvisor.fill("test");
+    // Verify that the search button is visible
+    await expect(poManager.searchContactBusinessPopup.searchButtonFromPopup).toBeVisible();
+    // Click the search button
+    await poManager.searchContactBusinessPopup.searchButtonFromPopup.click();
+    // Verify that the contact does not exist text is visible
+    await expect(poManager.searchContactBusinessPopup.contactDoesNotExistText).toContainText('Add this Contact?');
   });
 
-  test(`@dryrun First Playwright test execution for ${dataSet.officename}`, async () => {
-    const poManager = new POManager(page);
-
-    await allure.step("Search for contact or business with name as Test1", async () => {
-      await poManager.dashboardHeaderPage.searchContactBusiness("Test1");
-      expect(await poManager.dashboardHeaderPage.advanceSearch).toContainText('Advanced Search');
-    });
-
-    await allure.step("Click on Advanced Search and then select the dropdown", async () => {
-      await page.waitForLoadState("networkidle");
-      await poManager.dashboardHeaderPage.advanceSearch.waitFor();
-      await poManager.dashboardHeaderPage.advanceSearch.click();
-      await poManager.searchContactBusinessPopup.contactBusinessRadio.first().waitFor();
-    });
-
-    await allure.step("Click on Radio button for Contacts and assert that radio button is checked", async () => {
-      await poManager.searchContactBusinessPopup.contactBusinessRadio.nth(1).click();
-      await expect(poManager.searchContactBusinessPopup.contactBusinessRadio.nth(1)).toBeChecked();
-    });
-
-    await allure.step("Enter First name and Last name and then click on search", async () => {
-      await poManager.searchContactBusinessPopup.firstLastName.fill("Automa_akshayTambe");
-      await poManager.searchContactBusinessPopup.primaryAdvisor.fill("test");
-      await expect(poManager.searchContactBusinessPopup.searchButtonFromPopup).toBeVisible();
-      await poManager.searchContactBusinessPopup.searchButtonFromPopup.click();
-      await expect(poManager.searchContactBusinessPopup.contactDoesNotExistText).toContainText('Add this Contact?');
-    });
-
-    await allure.step("Verify that contact does not exist popup comes up with Yes and No button and then user clicks on No button", async () => {
-      await expect(poManager.searchContactBusinessPopup.contactNotExistYesButton).toBeVisible();
-      await poManager.searchContactBusinessPopup.contactNotExistYesButton.click();
-    });
-
-    await allure.step("Check if new contact popup is opened up", async () => {
-      await expect(poManager.newContactPopupWin.lastName).toHaveAttribute("ezcolid", "65542");
-    });
-
-    await allure.step("Enter Last name and First name and then click on Save and Close", async () => {
-      await poManager.newContactPopupWin.lastName.fill('Automa_Akshaytambe');
-      await poManager.newContactPopupWin.saveAndClose.click();
-    });
-
-    await allure.step("Verify that contact detail page is opened up", async () => {
-      await expect(poManager.contactDetailPageEle.lastName).toHaveAttribute("rawvalue", "Automa_Akshaytambe");
-    });
-
-    await allure.step("Delete contact record", async () => {
-      await poManager.dashBoardSideMenu.deleteRecord();
-    });
-
-    /*
-    // Example of additional code
-    console.log(await frameTwo.locator("#ipID_65627").isVisible());
-
-    // Finding the element with the Role and other parameters
-    await frameTwo.getByRole("button", { name: 'Search' }).click();
-
-    // Hard wait for 3 seconds
-    await page.waitForTimeout(3000);
-
-    const houseHoldnameField = await frameTwo.locator("div[class='FIELDS'] input[uniqueeventid*='SimpleForm']");
-    await houseHoldnameField.click();
-
-    const lastName = await pageFrame.locator('#lastname').getAttribute('value');
-    console.log(lastName);
-    await expect(lastName).toBe('Bobby');
-
-    const sourceField = pageFrame.locator("#source");
-    await sourceField.waitFor();
-    await sourceField.fill('SourceField');
-    await page.waitForTimeout(3000);
-
-    await pageFrame.locator("img[ezsubclass='dropdown']").nth(0).click();
-    await pageFrame.locator("#sc65547").selectOption('1');
-    */
+  /**
+   * Step 2: Verify that contact does not exist popup comes up with Yes and No button and then user clicks on No button
+   */
+  await allure.step("Verify that contact does not exist popup comes up with Yes and No button and then user clicks on No button", async () => {
+    // Verify that the contact not exist yes button is visible
+    await expect(poManager.searchContactBusinessPopup.contactNotExistYesButton).toBeVisible();
+    // Click the contact not exist yes button
+    await poManager.searchContactBusinessPopup.contactNotExistYesButton.click();
   });
 
-  test.skip('Creating new contact', async () => {
-    const poManager = new POManager(page);
-    await poManager.createNewContactRecord("Auto");
-    // await poManager.deleteAllExistingRecords("Rahul");
+  /**
+   * Step 3: Check if new contact popup is opened up
+   */
+  await allure.step("Check if new contact popup is opened up", async () => {
+    // Verify that the last name field has the attribute ezcolid with value 65542
+    await expect(poManager.newContactPopupWin.lastName).toHaveAttribute("ezcolid", "65542");
   });
 
-  test('Check filter setup', async () => {
-    const poManager = new POManager(page);
-    await poManager.sideMenuOptions.getSideMenuOption("Setup").click();
-    await poManager.sideMenuOptions.getFilterSubMenu("Filter").click();
-    await poManager.filtersPopup.filterNameTextField.fill("Auto_");
-    await poManager.filtersPopup.searchButton.click();
+  /**
+   * Step 4: Enter Last name and First name and then click on Save and Close
+   */
+  await allure.step("Enter Last name and First name and then click on Save and Close", async () => {
+    // Fill in the last name field with the value "Automa_Akshaytambe"
+    await poManager.newContactPopupWin.lastName.fill('Automa_Akshaytambe');
+    // Click the save and close button
+    await poManager.newContactPopupWin.saveAndClose.click();
   });
 
-  test('Search for Dynamic report with filter', async () => {
-    const poManager = new POManager(page);
-    await poManager.searchDynamicReportByName("Automa_");
-    // await poManager.searchDynamicReportByKeyword("All");
+  /**
+   * Step 5: Verify that contact detail page is opened up
+   */
+  await allure.step("Verify that contact detail page is opened up", async () => {
+    // Verify that the last name field has the attribute rawvalue with value "Automa_Akshaytambe"
+    await expect(poManager.contactDetailPageEle.lastName).toHaveAttribute("rawvalue", "Automa_Akshaytambe");
+  });
+
+  /**
+   * Step 6: Delete contact record
+   */
+  await allure.step("Delete contact record", async () => {
+    // Call the delete record function on the dashboard side menu
+    await poManager.dashBoardSideMenu.deleteRecord();
   });
 });
+
+/**
+ * This test is currently skipped
+ */
+test.skip('Creating new contact', async () => {
+  // Create a new instance of the POManager class, passing in the page object
+  const poManager = new POManager(page);
+  // Call the create new contact record function with the value "Auto"
+  await poManager.createNewContactRecord("Auto");
+  // Call the delete all existing records function with the value "Rahul"
+  // await poManager.deleteAllExistingRecords("Rahul");
+});
+
+/**
+ * This test checks the filter setup
+ */
+test('Check filter setup', async () => {
+  // Create a new instance of the POManager class, passing in the page object
+  const poManager = new POManager(page);
+  // Click the setup option on the side menu
+  await poManager.sideMenuOptions.getSideMenuOption("Setup").click();
+  // Click the filter sub menu option
+  await poManager.sideMenuOptions.getFilterSubMenu("Filter").click();
+  // Fill in the filter name text field with the value "Auto_"
+  await poManager.filtersPopup.filterNameTextField.fill("Auto_");
+  // Click the search button
+  await poManager.filtersPopup.searchButton.click();
+});
+
+/**
+ * This test searches for a dynamic report with a filter
+ */
+test('Search for Dynamic report with filter', async () => {
+  // Create a new instance of the POManager class, passing in the page object
+  const poManager = new POManager(page);
