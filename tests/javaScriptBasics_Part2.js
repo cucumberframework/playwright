@@ -53,6 +53,11 @@ console.log(mappedArray);
 let addedAfterReducing=mappedArray.reduce((sum,total)=>sum+total,0);
 console.log("addedAfterReducing-->"+addedAfterReducing)
 
+//all three map, reduce and filter can be done in single line 
+let inputArrayOne=[1,2,3,4,5,6,7,8]; 
+let finalResult=inputArrayOne.filter(score1=>score1%2==0).map(score2=>score2*3).reduce((sum,acc)=>sum+acc,0);
+console.log("This is result of all three operations==>"+finalResult);
+
 let charSequence=["a","b","c","d","e","f"];
 
 var stringOne ='geese'; 
@@ -66,4 +71,13 @@ var toReplaceIndex=charSequence.indexOf('e'+1);
 Character=Character.push(charSequence.indexOf(toReplaceIndex));
 console.log(Character);
 
+//this will stort the string in ascending order
+let str=["one","two","three","four","five"];
+console.log(str.sort().reverse());
 
+
+
+//sorting of the ineger values in of the array 
+let integerArr1=['5','001','003','004','012'];
+
+console.log(integerArr1.sort((a,b)=>a-b));
