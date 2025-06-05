@@ -53,6 +53,11 @@ console.log(mappedArray);
 let addedAfterReducing=mappedArray.reduce((sum,total)=>sum+total,0);
 console.log("addedAfterReducing-->"+addedAfterReducing)
 
+//all three map, reduce and filter can be done in single line 
+let inputArrayOne=[1,2,3,4,5,6,7,8]; 
+let finalResult=inputArrayOne.filter(score1=>score1%2==0).map(score2=>score2*3).reduce((sum,acc)=>sum+acc,0);
+console.log("This is result of all three operations==>"+finalResult);
+
 let charSequence=["a","b","c","d","e","f"];
 
 var stringOne ='geese'; 
@@ -66,4 +71,54 @@ var toReplaceIndex=charSequence.indexOf('e'+1);
 Character=Character.push(charSequence.indexOf(toReplaceIndex));
 console.log(Character);
 
+//this will stort the string in ascending order
+let str=["one","two","three","four","five"];
+console.log(str.sort());
+console.log(str.sort().reverse());
+let charArray="he@#llowo^&*rld";
 
+console.log(charArray.split(""));
+console.log(charArray.split("").sort().reverse().join());
+
+
+
+//sorting of the ineger values in of the array 
+let integerArr1=['5','001','003','004','012'];
+
+console.log(integerArr1.sort((a,b)=>a-b));
+
+//what are functions and how to declare the functions in javascript 
+let sumofNumbers = (a,b)=>a+b;
+console.log(sumofNumbers(5,10));
+
+//strings and its method in javascript 
+let day='tuesday   ';
+console.log(day.length); //will give length of the string
+console.log(day.slice(0,5)); //will give the string from index 0 to 5
+console.log(day[4]); //will give the character at index 4
+console.log(day);
+let splittedDay=day.split("s");  //will split the string based on the character 's' and return array
+console.log(splittedDay); 
+console.log(splittedDay[1].trim()); //will split the string based on the character 's' and return array and trim the spaces
+
+//converting strings to number and 
+let firstStringdate="27";
+let seconfStringDate="10";
+let finalDateDiffrence= parseInt(firstStringdate)-parseInt(seconfStringDate);
+console.log("Final Diffrence between dates are-->"+finalDateDiffrence);
+let integerFormatOfString=finalDateDiffrence.toString(); //this will convert the number to string format
+console.log(typeof(integerFormatOfString));// this will convert back the numbeer back to string format 
+
+//concanitation of two strings 
+let stringone= "hello";
+let stringtwo=" this is second String";
+console.log(stringone+stringtwo);
+
+let stringValue="hi this is the great day and hi i am rahul hi i am resigning , hi i am done with hi";
+let index=stringValue.indexOf("hi"); //this will give the index of first occurance of the string 'hi'
+let count=0;
+while(index!=-1){
+count++;
+index=stringValue.indexOf("hi",index+1);
+}
+console.log("Count of hi in the string is-->"+count);
