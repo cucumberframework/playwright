@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< Updated upstream
     "test": "jest",
     "alluicases":"npx playwright test --ui",
     "allheadlesscases":"npx playwright test --ui",
@@ -12,14 +13,27 @@
     "allregression":"npx playwright test --project=chrome --grep @regression --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
     "allsmoke":"npx playwright test --project=chrome --grep @smoke --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report ",
     "dryrun":"npx playwright test --grep @dryrun --project=chrome --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report"
+=======
+    "alluicases": "npx playwright test --ui",
+    "allheadlesscases": "npx playwright test --ui",
+    "allchromeexecutions": "npx playwright test --project=chrome --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
+    "allsafariexecution": "npx playwright test --project=safari --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
+    "allregression": "npx playwright test --project=chrome --grep @regression --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
+    "allsmoke": "npx playwright test --project=chrome --grep @smoke --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report ",
+    "dryrun": "npx playwright test --grep @dryrun --project=chrome --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
+    "test": "playwright test"
+>>>>>>> Stashed changes
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.25.1",
     "@playwright/test": "^1.44.0",
     "@types/node": "^20.12.8",
-    "allure-playwright": "^2.15.1"
+    "allure-playwright": "^2.15.1",
+    "eslint": "^9.25.1",
+    "globals": "^16.0.0"
   },
   "dependencies": {
     "exceljs": "^4.4.0"

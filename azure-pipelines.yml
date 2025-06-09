@@ -4,19 +4,39 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
+  branches:
+    include:
+      - main # Replace with your branch name
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
+# Step 1: Install Node.js
+- task: UseNode@2
   inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+    version: '16.x' # Use the Node.js version compatible with your project
 
+# Step 2: Install dependencies
 - script: |
     npm install
-    npm run build
+  displayName: 'Install dependencies'
+
+# Step 3: Run Playwright tests
+- script: |
+    npx playwright install
     npx playwright test
-  displayName: 'npm install and build'
+  displayName: 'Run Playwright tests'
+
+# Step 4: Publish test results
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: '**/test-results/*.xml' # Adjust path if needed
+    testRunTitle: 'Playwright Test Results'
+
+# Step 5: Publish Playwright report
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'playwright-report' # Ensure this matches your Playwright report folder
+    artifactName: 'playwright-report'
+    publishLocation: 'Container'
