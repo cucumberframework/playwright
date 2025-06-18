@@ -7,4 +7,4 @@ class contactDetailPage{
 
     }
 }
-module.exports={contactDetailPage}
+module={contactDetailPage}
