@@ -1,12 +1,13 @@
 const { CreateStep2 }=require('../pageObjects/CreateStep2');
 const { DashboardHeader}=require('../pageObjects/DashboardHeader');
-const{ SearchContactBusinessPopup }=require('../pageObjects/SearchContactBusinessPopup');
-const{ newContactPopup }=require('../pageObjects/newContactPopup')
+const { SearchContactBusinessPopup }=require('../pageObjects/SearchContactBusinessPopup');
+const { newContactPopup }=require('../pageObjects/newContactPopup')
 const { contactDetailPage }=require('../pageObjects/contactDetailpage')
 const { DashboardSidemenu }=require('../pageObjects/DashboardSidemenu')
 const { sideMenu }=require('../pageObjects/sideMenu');
 const { searchDynamicReports }=require('../pageObjects/Reports/searchDynamicReport');
-const {filters }=require('../pageObjects/Filters/filters')
+const {filters }=require('../pageObjects/Filters/filters');
+const { golfyPOManager } = require('./golfyPOManager');
 class POManager{
 
     constructor(page){
@@ -15,11 +16,12 @@ class POManager{
       this.dashboardHeaderPage= new DashboardHeader(this.page);
       this.searchContactBusinessPopup= new SearchContactBusinessPopup(this.page);
       this.newContactPopupWin=new newContactPopup(this.page);
-      this.contactDetailPageEle=new contactDetailPage(page);
-      this.dashBoardSideMenu=new DashboardSidemenu(page);
-      this.sideMenuOptions=new sideMenu(page);
-      this.searchDynamicReportsPopup=new searchDynamicReports(page);
-      this.filtersPopup=new filters(page);
+      this.contactDetailPageEle= new contactDetailPage(this.page);
+      this.dashBoardSideMenu=new DashboardSidemenu(this.page);
+      this.sideMenuOptions=new sideMenu(this.page);
+      this.searchDynamicReportsPopup=new searchDynamicReports(this.page);
+      this.filtersPopup=new filters(this.page);
+      this.golfyManager=new golfyPOManager(this.page);
     }
     async deleteAllExistingRecords(recordName){
       await this.dashboardHeaderPage.advanceSearch.waitFor()
