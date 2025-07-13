@@ -9,5 +9,8 @@ test.describe('Describe block',()=>{
     test('First Test',async({page})=>{
         await page.goto("https://selectorshub.com/xpath-practice-page/");
         await page.getByRole('textbox',{name:'user password field'}).fill("Rahul");
-    })
+    });
+    test.skip('Second Test',async({page})=>{
+        Console.log('This is second test record');
+    });
 });
