@@ -1,6 +1,8 @@
 /**
  * Test suite for contact management
  */
+const {test,expect}=require('@playwright/test');
+const {POManager}=require('../pageObjects/POManager');
 test('Test suite for contact management', async () => {
   // Create a new instance of the POManager class, passing in the page object
   const poManager = new POManager(page);
