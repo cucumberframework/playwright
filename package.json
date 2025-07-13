@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "npx playwright test",
     "alluicases": "npx playwright test tests/repracticeAllConceptsofPlayWright"
   },
   "keywords": [],
