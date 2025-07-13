@@ -100,3 +100,4 @@ test('Check filter setup', async () => {
 test('Search for Dynamic report with filter', async () => {
   // Create a new instance of the POManager class, passing in the page object
   const poManager = new POManager(page);
+});
