@@ -179,4 +179,13 @@ await expect(page).toHaveURL()	Page has a URL
 await expect(response).toBeOK()	Response has an OK status
 
 
+//"allheadlesscases": "npx playwright test --ui",
+    "allchromeexecutions": "npx playwright test --project=chrome --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
+    "allsafariexecution": "npx playwright test --project=safari --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
+    "allregression": "npx playwright test --project=chrome --grep @regression --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
+    "allsmoke": "npx playwright test --project=chrome --grep @smoke --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report ",
+    "dryrun": "npx playwright test --grep @dryrun --project=chrome --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
+    "test": "playwright test"
+
+
 
