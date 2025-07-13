@@ -15,8 +15,14 @@ jobs:
         node-version: lts/*
     - name: Install dependencies
       run: npm ci
+    - name: Clean Playwright Cache
+      run: rm -rf ~/.cache/ms-playwright
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
     - name: Install Playwright Browsers
       run: npx playwright install
+    - name: Check installed browsers
+      run: ls -R ~/.cache/ms-playwright
     - name: Run Playwright tests
       run: npx playwright test tests/repracticingAllConceptsofPlayWright
     - uses: actions/upload-artifact@v4
