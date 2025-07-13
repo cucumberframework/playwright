@@ -3,6 +3,7 @@ const { test, expect } = require("@playwright/test")
 const baseURL="http://216.10.245.166";
 //var author='33 dsd77676s'
 test("RahulShetty Acadamy library api",async({request})=>{
+    tag:"@reg1";
    
     const resource="/Library/Addbook.php";
     const finalURL=`${baseURL}${resource}`;

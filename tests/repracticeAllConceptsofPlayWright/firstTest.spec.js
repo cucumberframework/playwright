@@ -6,11 +6,13 @@ test.describe('Describe block',()=>{
         context=await browser.newContext();
         page=await context.newPage();
     });
-    test('First Test',async({page})=>{
+    test('@reg1 First Test',async({page})=>{
+        
         await page.goto("https://selectorshub.com/xpath-practice-page/");
-        await page.getByRole('textbox',{name:'user password field'}).fill("Rahul");
+        //await page.getByRole('textbox',{name:'user password field'}).fill("Rahul");
     });
-    test.skip('Second Test',async({page})=>{
+    test.fixme('Second Test',async({page})=>{
+        tag:'@smoke';
         Console.log('This is second test record');
     });
 });
