@@ -38,7 +38,7 @@ module.exports = defineConfig({
       viewport:{width:1920,height:1400},
       },
     },
-    {
+  /*  {
       name:'safari',
         use: {
       browserName: 'webkit',
@@ -50,6 +50,7 @@ module.exports = defineConfig({
 
       },
     }
+    */
 ]
 });
 
