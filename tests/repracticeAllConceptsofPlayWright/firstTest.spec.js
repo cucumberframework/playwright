@@ -45,6 +45,7 @@ test.describe('Describe block', () => {
         await expect(poManagerone.alertButton).toBeVisible();
         await poManagerone.alertButton.click();
         await page.on('alert', alert => alert.close());
+       // await poManagerone.login(poManagerone.alertButton)
     });
     test('@Iframe Iframetesting', async ({ page }) => {
         poManagerone = new pomanagerone(page);

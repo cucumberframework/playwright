@@ -19,10 +19,14 @@ class pomanagerone {
         this.firstCrushField = this.firstIframe.getByPlaceholder("First Crush");
         this.secondIFrame = this.firstIframe.frameLocator("#pact2");
         this.currentCrushName = this.secondIFrame.getByPlaceholder("Current Crush Name");
-
-
-
     }
+     
+/*async login() {
+    let text =await this.alertButton.getByText();
+    console.log(text);
+}
+*/
 
 }
+
 module.exports = { pomanagerone };

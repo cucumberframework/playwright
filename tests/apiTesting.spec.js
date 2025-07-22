@@ -8,15 +8,15 @@ test("This is to test API automation ", async ({ request }) => {
     //APIResponse
     //APIResponseAssertions
 
-    const response = await request.get("https://reqres.in/api/users/2");
+    const response = await request.get("https://reqres.in/api/users?page=2");
     console.log(await response.json());
     var rawResponse= await response.body();
     console.log("This is response body----"+(await response.body()).toJSON() )
     var jsonResponse=JSON.parse(rawResponse.toString());
     console.log("This is output of jsonResponse--"+jsonResponse);
     var responseText = await response.text();
-    //console.log(responseText);
-    expect(responseText).toContain("janet");
+    console.log(responseText);
+    expect(responseText).toContain("Ferguson");
     expect(response.status()).not.toBe(600);
     expect(response.status()).toBe(200);
 
