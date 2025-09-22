@@ -36,7 +36,7 @@ test.describe('Sample describe', () => {
         const updatedParts = parts.map(part => part.trim() + " " + today);
 
         // Join back with "."
-        const output = updatedParts.join(". ");
+        const output = updatedParts.join(".");
 
         console.log(output);
         await poManager.naukriobj.resumeheadline.fill(output);

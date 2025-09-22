@@ -1,0 +1,48 @@
+{
+  "id": 1,
+  "name": "Rahul Barapatre",
+  "email": "rahul@example.com",
+  "address": {
+    "street": "123 Main Street",
+    "city": "Nagpur",
+    "state": "MH",
+    "postalCode": "440001",
+    "country": "India"
+  },
+  "orders": [
+    {
+      "orderId": "ORD001",
+      "date": "2025-09-17",
+      "amount": 2500,
+      "items": [
+        {
+          "productId": "P101",
+          "productName": "Laptop",
+          "quantity": 1,
+          "price": 2500
+        }
+      ]
+    },
+    {
+      "orderId": "ORD002",
+      "date": "2025-09-10",
+      "amount": 1200,
+      "items": [
+        {
+          "productId": "P201",
+          "productName": "Headphones",
+          "quantity": 2,
+          "price": 600
+        }
+      ]
+    }
+  ],
+  "preferences": {
+    "newsletter": true,
+    "notifications": {
+      "email": true,
+      "sms": false,
+      "push": true
+    }
+  }
+}

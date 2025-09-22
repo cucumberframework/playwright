@@ -82,7 +82,7 @@ console.log(charArray.split("").sort().reverse().join());
 
 
 
-//sorting of the ineger values in of the array 
+//sorting of the integer values in of the array 
 let integerArr1=['5','001','003','004','012'];
 
 console.log(integerArr1.sort((a,b)=>a-b));

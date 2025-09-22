@@ -178,7 +178,7 @@ await expect(page).toHaveTitle()	Page has a title
 await expect(page).toHaveURL()	Page has a URL
 await expect(response).toBeOK()	Response has an OK status
 
-
+---------------------------------------------------------------------------------------------------------
 //"allheadlesscases": "npx playwright test --ui",
     "allchromeexecutions": "npx playwright test --project=chrome --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
     "allsafariexecution": "npx playwright test --project=safari --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
@@ -187,5 +187,47 @@ await expect(response).toBeOK()	Response has an OK status
     "dryrun": "npx playwright test --grep @dryrun --project=chrome --reporter=line,allure-playwright && allure generate ./allure-results --clean && allure open ./allure-report",
     "test": "playwright test"
 
+---------------------------------------------------------------------------------------------------------
+// page navigation///////////////////////////////////////
+await Promise.all([
+    page.waitForNavigation(),
+    page.click("#id")
+    ])
+await page.waitForLoadState();
 
+---------------------------------------------------------------------------------------------------------
+//Handeling file download
+
+const [down]=await Promise.all([
+    page.waitForEvent('download'),
+    page.click("#locatorforDownload"),
+    ])
+    down.saveAs("filenameofdownload.png");
+
+---------------------------------------------------------------------------------------------------------
+//Handeling file upload
+await page.setInputFile("#locator of upload", "filePath")
+---------------------------------------------------------------------------------------------------------
+
+//Handeling multiple tabs
+const [tabs]= await Promise.all([
+    page.waitForEvent('popup'),
+    page.click("#locatorto opn newtab")
+    ]);
+    tabs.waitForLoadState();
+
+---------------------------------------------------------------------------------------------------------
+//How to intercept and mock network requests?
+
+Use page.route (or context.route) and route.fulfill() or route.continue().
+Code:
+
+await page.route('**/api/products', route =>
+  route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ products: [] }),
+  })
+);
+await page.goto('/products');
 
