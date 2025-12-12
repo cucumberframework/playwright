@@ -3,6 +3,19 @@
  */
 const {test,expect}=require('@playwright/test');
 const {POManager}=require('../pageObjects/POManager');
+const { beforeEach } = require('node:test');
+
+test('Browser  playwright test execution', async ({browser})=>
+{
+    //newContext() is used to create new context of the browser , it is equivalen
+    //webDriver driver = new chromeDirver (), it is used when we need to set cookies 
+    
+    const context =await browser.newContext();
+
+    //it is used to open new page 
+    const page= await context.newPage();
+})
+
 test('Test suite for contact management', async () => {
   // Create a new instance of the POManager class, passing in the page object
   const poManager = new POManager(page);

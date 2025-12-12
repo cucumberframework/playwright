@@ -1,0 +1,50 @@
+{
+  "user": {
+    "id": 101,
+    "name": "Rahul",
+    "email": "rahul@example.com",
+    "profile": {
+      "age": 29,
+      "gender": "male",
+      "address": {
+        "city": "Pune",
+        "state": "Maharashtra",
+        "zipcode": "411001"
+      },
+      "preferences": {
+        "notifications": true,
+        "theme": "dark",
+        "languages": ["English", "Hindi", "Marathi"]
+      }
+    }
+  },
+  "orders": [
+    {
+      "orderId": "ORD1001",
+      "date": "2025-09-25",
+      "status": "Shipped",
+      "items": [
+        { "name": "Laptop", "qty": 1, "price": 65000 },
+        { "name": "Mouse", "qty": 2, "price": 1500 }
+      ]
+    },
+    {
+      "orderId": "ORD1002",
+      "date": "2025-09-28",
+      "status": "Delivered",
+      "items": [
+        { "name": "Mobile", "qty": 1, "price": 25000 },
+        { "name": "Headphones", "qty": 1, "price": 2000 }
+      ]
+    }
+  ],
+  "subscription": {
+    "plan": "Premium",
+    "validTill": "2026-09-30",
+    "features": {
+      "support": "24x7",
+      "devicesAllowed": 5,
+      "storage": "1TB"
+    }
+  }
+}
