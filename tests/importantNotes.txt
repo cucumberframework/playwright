@@ -211,7 +211,7 @@ await page.setInputFile("#locator of upload", "filePath")
 
 //Handeling multiple tabs
 const [tabs]= await Promise.all([
-    page.waitForEvent('popup'),
+    context.waitForEvent('page'),
     page.click("#locatorto opn newtab")
     ]);
     tabs.waitForLoadState();

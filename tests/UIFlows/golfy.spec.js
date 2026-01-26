@@ -1,5 +1,5 @@
 const {test,expect } =require('@playwright/test');
-const { golfyPOManager } = require('../pageObjects/golfyPOManager');
+const { golfyPOManager } = require('../../pageObjects/golfyPOManager');
 const { allure } = require('allure-playwright');
 
 

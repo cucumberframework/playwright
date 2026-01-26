@@ -1,5 +1,5 @@
 const {test, expect}= require('@playwright/test');
-const testdata=require('../tests/testdata.json');
+const testdata=require('../TestData/testdata.json');
 
 let context;
 let page;

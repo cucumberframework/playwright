@@ -11,7 +11,8 @@ test.describe('this is first describe',()=>{
     console.log(await page.locator("#opentab").isVisible());
     await expect(page.locator("#opentab")).toBeVisible();
     //user cliks on training centre 
-   const [newPage]= await Promise.all(
+   
+    const [newPage]= await Promise.all(
     [context.waitForEvent('page'),
      page.locator("#opentab").click()]
    );

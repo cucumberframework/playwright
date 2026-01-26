@@ -2,7 +2,7 @@
  * Test suite for contact management
  */
 const {test,expect}=require('@playwright/test');
-const {POManager}=require('../pageObjects/POManager');
+const {POManager}=require('../../pageObjects/POManager');
 const { beforeEach } = require('node:test');
 
 test('Browser  playwright test execution', async ({browser})=>
