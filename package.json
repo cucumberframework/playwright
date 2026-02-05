@@ -19,6 +19,8 @@
     "globals": "^16.0.0"
   },
   "dependencies": {
-    "exceljs": "^4.4.0"
+    "dotenv": "^17.2.3",
+    "exceljs": "^4.4.0",
+    "openai": "^6.16.0"
   }
 }

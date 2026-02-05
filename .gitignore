@@ -7,3 +7,4 @@ test-results/
 screenshots/
 allure-report/
 allure-results/
+.env
