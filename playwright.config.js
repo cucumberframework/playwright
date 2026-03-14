@@ -27,6 +27,12 @@ module.exports = defineConfig({
   ['line'],
   ['allure-playwright']
 ],
+  globalSetup: require.resolve('./global-setup'),
+   //./global-setup.js file will be executed before the test execution starts and it will set the environment variable for the storage state which we can use in our test cases to run the test cases with already logged in state
+  use: {
+    // Every test will use this saved auth state by default
+    storageState: 'auth.json',
+  },
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   projects:[
     {
@@ -35,7 +41,6 @@ module.exports = defineConfig({
       browserName: 'chromium',  // for safari browser user webkit , for firefox user firefox 
       trace: 'retain-on-failure', // retain on failure wil generate traces only for failed test scripts 
       headless: false,
-      storageState: 'auth.json',
       screenshot:'only-on-failure',
       viewport:{width:1920,height:1400},
       },
