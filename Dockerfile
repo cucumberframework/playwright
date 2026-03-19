@@ -1,10 +1,7 @@
-FROM node:20-noble
+FROM mcr.microsoft.com/playwright:v1.40.1-noble
 WORKDIR /usr/src/apps
 COPY package*.json ./
-RUN apt-get update && apt-get install -y \
-    libasound2t64 \
-    && rm -rf /var/lib/apt/lists/*
 RUN npm install
-RUN npx playwright install --with-deps
+RUN npx playwright install
 COPY . .
 CMD ["npx", "playwright", "test"]
