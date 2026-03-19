@@ -28,7 +28,7 @@ module.exports = defineConfig({
   ['allure-playwright']
 ],
   globalSetup: require.resolve('./global-setup'),
-   //./global-setup.js file will be executed before the test execution starts and it will set the environment variable for the storage state which we can use in our test cases to run the test cases with already logged in state
+  //./global-setup.js file will be executed before the test execution starts and it will set the environment variable for the storage state which we can use in our test cases to run the test cases with already logged in state
   use: {
     // Every test will use this saved auth state by default
     storageState: 'auth.json',
