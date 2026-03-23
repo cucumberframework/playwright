@@ -1,5 +1,5 @@
 
-const { test: base, expect } = require('@playwright/test')
+const { test: base, expect } = require('@playwright/test');
 export const test = base.extend({
 
     login: async ({ page }, use) => {
@@ -9,11 +9,11 @@ export const test = base.extend({
         const data = {
             userName: 'rahul.barapatre@test.com',
             password: 'test1234'
-        }
+        };
         
         await use(data);
     
     }
 
-})
+});
 module.exports = { test, expect };
