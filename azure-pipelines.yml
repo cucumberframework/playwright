@@ -4,32 +4,74 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  NODE_VERSION: '20.x'
+
 steps:
 # 1. Install Node.js
 - task: NodeTool@0
   inputs:
-    versionSpec: '20.x'
-  displayName: 'Install Node.js'
+    versionSpec: $(NODE_VERSION)
+  displayName: 'Install Node.js $(NODE_VERSION)'
 
-# 2. Install dependencies
+# 2. Cache node_modules
+- task: Cache@2
+  inputs:
+    key: 'npm | "$(Agent.OS)" | package-lock.json'
+    restoreKeys: |
+      npm | "$(Agent.OS)"
+    path: $(npm_config_cache)
+  displayName: 'Cache npm packages'
+
+# 3. Install dependencies
 - script: |
     npm ci
   displayName: 'Install NPM packages'
 
-# 3. Install Playwright browsers
+# 4. Install Playwright browsers
 - script: |
     npx playwright install --with-deps
   displayName: 'Install Playwright Browsers'
 
-# 4. Run Playwright tests
+# 5. Lint code
 - script: |
-    npx playwright test
+    npm run lint
+  displayName: 'Run ESLint'
+  continueOnError: true
+
+# 6. Run Playwright tests
+- script: |
+    npm test
   displayName: 'Run Playwright Tests'
 
-# 5. Publish Playwright HTML report
+# 7. Generate Allure report
+- script: |
+    npm run allure:generate
+  displayName: 'Generate Allure Report'
+  condition: always()
+
+# 8. Publish Playwright HTML report
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: 'playwright-report'
     artifact: 'playwright-report'
     publishLocation: 'pipeline'
   displayName: 'Publish Playwright HTML Report'
+  condition: always()
+
+# 9. Publish Allure report
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'allure-report'
+    artifact: 'allure-report'
+    publishLocation: 'pipeline'
+  displayName: 'Publish Allure Report'
+  condition: always()
+
+# 10. Publish test results
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: 'test-results/**/*.xml'
+    testRunTitle: 'Playwright Tests'
+  displayName: 'Publish Test Results'
+  condition: always()

@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const { POManager } = require('../../pageObjects/POManager');
 const { allure } = require('allure-playwright');
 
-test.describe('SauceDemo Login Tests', () => {
+test.describe('SauceDemo Login Tests @smoke @regression', () => {
 
     test('Login with standard user', async ({ page }) => {
         const pomanager = new POManager(page);
