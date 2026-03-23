@@ -9,6 +9,7 @@ const { searchDynamicReports }=require('../pageObjects/Reports/searchDynamicRepo
 const {filters }=require('../pageObjects/Filters/filters');
 const { golfyPOManager } = require('./golfyPOManager');
 const {naukriPage}=require('../pageObjects/naukriPage');
+const { SauceDemoPage } = require('../pageObjects/sauceDemoPage');
 class POManager{
 
     constructor(page){
@@ -24,6 +25,7 @@ class POManager{
       this.filtersPopup=new filters(this.page);
       this.golfyManager=new golfyPOManager(this.page);
       this.naukriobj=new naukriPage(this.page);
+      this.sauceDemoPage = new SauceDemoPage(this.page);
     }
     async deleteAllExistingRecords(recordName){
       await this.dashboardHeaderPage.advanceSearch.waitFor()

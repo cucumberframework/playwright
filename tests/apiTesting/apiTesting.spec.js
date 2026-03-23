@@ -9,6 +9,7 @@ test("This is to test API automation ", async ({ request }) => {
     //APIResponseAssertions
 
     const response = await request.get("https://reqres.in/api/users?page=2");
+    expect(response.status()).toBe(200);
     console.log(await response.json());
     var rawResponse= await response.body();
     console.log("This is response body----"+(await response.body()).toJSON() )
