@@ -1,5 +1,6 @@
 
-require('dotenv').config(); 
+require('dotenv').config();
+const fs = require('fs');
 const { defineConfig, devices } = require('@playwright/test');
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -15,27 +16,32 @@ module.exports = defineConfig({
       
   },
   /* Run tests in files in parallel */
-  fullyParallel: false,
+  fullyParallel: process.env.CI ? false : true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 0 : 0,
+  retries: process.env.RETRIES ? parseInt(process.env.RETRIES) : (process.env.CI ? 2 : 0),
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : 1,
+  workers: process.env.WORKERS ? parseInt(process.env.WORKERS) : (process.env.CI ? 2 : undefined),
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
   ['line'],
   ['allure-playwright']
 ],
+  globalSetup: require.resolve('./global-setup'),
+  //./global-setup.js file will be executed before the test execution starts and it will set the environment variable for the storage state which we can use in our test cases to run the test cases with already logged in state
+  use: {
+    // Every test will use this saved auth state by default, but skip in CI if not available
+    storageState: process.env.CI ? (fs.existsSync('./auth.json') ? 'auth.json' : undefined) : 'auth.json',
+  },
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   projects:[
     {
       name:'chrome',
       use: {
-      browserName: 'chromium',  // for safari browser user webkit , for firefox user firefox 
-      trace: 'retain-on-failure', // retain on failure wil generate traces only for failed test scripts 
-      headless: false,
-      storageState: 'auth.json',
+      browserName: process.env.BROWSER || 'chromium',  // for safari browser user webkit , for firefox user firefox
+      trace: 'retain-on-failure', // retain on failure wil generate traces only for failed test scripts
+      headless: process.env.HEADLESS ? process.env.HEADLESS === 'true' : (process.env.CI ? true : false),
       screenshot:'only-on-failure',
       viewport:{width:1920,height:1400},
       },

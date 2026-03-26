@@ -1,7 +1,22 @@
-FROM node:18.17.1
-WORKDIR /usr/src/apps
+FROM mcr.microsoft.com/playwright:v1.53.1-noble
+
+# Set working directory
+WORKDIR /usr/src/app
+
+# Copy package files
 COPY package*.json ./
-RUN npm install
+
+# Install dependencies
+RUN npm ci
+
+# Install Playwright browsers
 RUN npx playwright install --with-deps
+
+# Copy source code
 COPY . .
-CMD ["npx", "playwright", "test"]
+
+# Create directory for test results
+RUN mkdir -p test-results playwright-report allure-results allure-report
+
+# Run tests
+CMD ["npm", "test"]
