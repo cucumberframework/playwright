@@ -12,3 +12,11 @@ let replaced= input.replace(/[^a-zA-Z0-9]/g,"");
 console.log(replaced);
 
 //[^a-zA-Z0-9]/g
+
+//AS&12DF312%67
+let input="AS&12DF312%67"
+let letters = input.replace(/[^A-Z]/g,"");
+let numbers=input.replace(/[^0-9]/g,"");
+let charcters = input.replace(/[A-Za-z0-9]/g,""); //it will remove all characrtes and keep only special characters 
+//console.log(charcters);
+console.log(letters+numbers+charcters);
